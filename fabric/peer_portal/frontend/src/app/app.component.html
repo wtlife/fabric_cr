@@ -1,0 +1,99 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Portal</a>
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+      <!-- <a class="nav-link" href="#">Sign out</a> -->
+    </li>
+  </ul>
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ngb-accordion #acc="ngbAccordion" [closeOthers]="true" activeIds="panel-digest">
+          <ngb-panel title="摘要链" id="panel-digest">
+            <ng-template ngbPanelContent>
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/initdigest" routerLinkActive="active">初始化</a>
+                </li>
+              </ul>
+            </ng-template>
+          </ngb-panel>
+          <ngb-panel title="广告主" id="panel-ad">
+            <ng-template ngbPanelContent>
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/createadv" routerLinkActive="active">创建</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/createchannel" routerLinkActive="active">创建应用</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/addorg" routerLinkActive="active">添加广告平台</a>
+                </li>
+              </ul>
+            </ng-template>
+          </ngb-panel>
+          <ngb-panel title="广告平台" id="panel-af">
+            <ng-template ngbPanelContent>
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/createaffi" routerLinkActive="active">创建</a>
+                </li>
+              </ul>
+            </ng-template>
+          </ngb-panel>
+
+          <ngb-panel title="TEE" id="panel-tee">
+            <ng-template ngbPanelContent>
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <a class="nav-link" routerLinkActive="active">状态</a>
+                </li>
+              </ul>
+            </ng-template>
+          </ngb-panel>
+          <ngb-panel title="Postback" id="panel-pb">
+            <ng-template ngbPanelContent>
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <a class="nav-link" routerLinkActive="active">配置</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" routerLinkActive="active">调用</a>
+                </li>
+              </ul>
+            </ng-template>
+          </ngb-panel>
+          <ngb-panel title="报表" id="panel-report">
+            <ng-template ngbPanelContent>
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/summaryreport"  routerLinkActive="active">统计报表</a>
+                </li>
+              </ul>
+            </ng-template>
+          </ngb-panel>
+        </ngb-accordion>
+      </div>
+    </nav>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+      <div class="row">
+        <div class="col-6">
+          <router-outlet>
+
+          </router-outlet>
+        </div>
+        <div class="col-6">
+          <app-message-list></app-message-list>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>

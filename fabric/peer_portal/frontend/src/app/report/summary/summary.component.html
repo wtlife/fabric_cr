@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="table-responsive">
+      <table class="table table-sm table-striped">
+          <thead class="thead-dark">
+            <tr>
+              <th >advertiser_id</th>
+              <th >dt</th>
+              <th >appid</th>
+              <th >country_iso</th>
+              <th >city</th>
+              <th >version_code</th>
+              <th >media_source</th>
+              <th >campaign_id</th>
+              <th >adset_id</th>
+              <th >ad_id</th>
+              <th >site_id</th>
+              <th >clicks</th>
+              <th >installs</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let summary of summaries | async as summaryList">
+              <td>{{summary.advertiser_id}}</td>
+              <td>{{summary.dt}}</td>
+              <td>{{summary.appid}}</td>
+              <td>{{summary.country_iso}}</td>
+              <td>{{summary.city}}</td>
+              <td>{{summary.version_code}}</td>
+              <td>{{summary.media_source}}</td>
+              <td>{{summary.campaign_id}}</td>
+              <td>{{summary.adset_id}}</td>
+              <td>{{summary.ad_id}}</td>
+              <td>{{summary.site_id}}</td>
+              <td>{{summary.clicks}}</td>
+              <td>{{summary.installs}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+
+  </div>
+
+</div>

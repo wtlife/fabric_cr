@@ -1,0 +1,12 @@
+<div>
+  <div class="clearfix">
+    <span class="btn">日志</span>
+    <button class="btn btn-light float-right" (click)="messageService.clear()">clear</button>
+  </div>
+  <hr/>
+  <div *ngIf="messageService.messages.length">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" *ngFor='let message of messageService.messages'> {{message}} </li>
+    </ul>
+  </div>
+</div>
