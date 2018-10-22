@@ -67,13 +67,23 @@ CHAINCODE_VERSION_2="2.0"
 CHAINCODE_VERSION_2_POLICY="OR ('"${ORG1_MSP}".peer','"${ORG2_MSP}".peer')" 
 
 # digest chaincode
-CHAINCODE_PATH="digestcc"
-CHAINCODE_NAME="mydigestcc"
+# CHAINCODE_PATH="digestcc"
+# CHAINCODE_NAME="mydigestcc"
+# CHAINCODE_EMPTY_ARGS='[]'
+# CHAINCODE_QUERY_ARGS='["queryDataByTimeRange","1","3"]' 
+# CHAINCODE_INVOKE_ARGS_1='["appendDigestData","1","1","a","b","c","d"]' 
+# CHAINCODE_INVOKE_ARGS_2='["appendDigestData","2","2","a","b","c","d"]' 
+# CHAINCODE_INVOKE_ARGS_3='["appendDigestData","3","3","a","3","c","d"]' 
+
+# right chaincode
+CHAINCODE_PATH="rightcc"
+CHAINCODE_NAME="myrightcc"
 CHAINCODE_EMPTY_ARGS='[]'
-CHAINCODE_QUERY_ARGS='["queryDataByTimeRange","1","3"]' 
-CHAINCODE_INVOKE_ARGS_1='["appendDigestData","1","1","a","b","c","d"]' 
-CHAINCODE_INVOKE_ARGS_2='["appendDigestData","2","2","a","b","c","d"]' 
-CHAINCODE_INVOKE_ARGS_3='["appendDigestData","3","3","a","3","c","d"]' 
+CHAINCODE_QUERY_ARGS='["queryRightByName","work1","wutao","press"]'
+CHAINCODE_INVOKE_ARGS_1='["regist","work1","wutao","press","1948","0xhash","sigsigsig"]' 
+CHAINCODE_INVOKE_ARGS_2='["regist","work2","wutao","press","1949","0xhash","sigsigsig"]' 
+CHAINCODE_INVOKE_ARGS_3='["regist","work3","wutao","press","1950","0xhash","sigsigsig"]' 
+
 
 uplogd "clean"
 if [ "$workspaces_path" == "" ] || [ "$workspaces_path" == "/" ]; then

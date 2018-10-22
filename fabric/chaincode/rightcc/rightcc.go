@@ -16,7 +16,7 @@ type Right struct {
 	Name      string `json:"name"`
 	Author    string `json:"author"`
 	Press     string `json:"press"`
-	Timestamp int64  `json:"ts"`
+	Timestamp int64  `json:"ts"` //
 	Hash      string `json:"hash"`
 	Signature string `json:"sig"`
 }
