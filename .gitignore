@@ -2,7 +2,7 @@ paper
 workspaces
 fabric/attribute_backend
 fabric/peer_portal
+fabric/.idea
 
-*.idea
 *.iml
 *.class
