@@ -1,6 +1,6 @@
-package main.app.org;
+package wtlife.app.org;
 
-import main.app.user.RightUser;
+import wtlife.app.user.RightUser;
 import org.hyperledger.fabric.sdk.Peer;
 import org.hyperledger.fabric.sdk.User;
 import org.hyperledger.fabric_ca.sdk.HFCAClient;

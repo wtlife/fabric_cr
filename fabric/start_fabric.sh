@@ -79,10 +79,10 @@ CHAINCODE_VERSION_2_POLICY="OR ('"${ORG1_MSP}".peer','"${ORG2_MSP}".peer')"
 CHAINCODE_PATH="rightcc"
 CHAINCODE_NAME="myrightcc"
 CHAINCODE_EMPTY_ARGS='[]'
-CHAINCODE_QUERY_ARGS='["queryRightByName","work1","wutao","press"]'
-CHAINCODE_INVOKE_ARGS_1='["regist","work1","wutao","press","1948","0xhash","sigsigsig"]' 
-CHAINCODE_INVOKE_ARGS_2='["regist","work2","wutao","press","1949","0xhash","sigsigsig"]' 
-CHAINCODE_INVOKE_ARGS_3='["regist","work3","wutao","press","1950","0xhash","sigsigsig"]' 
+CHAINCODE_QUERY_ARGS='["queryRightByName","work1","wutao","org1"]'
+CHAINCODE_INVOKE_ARGS_1='["regist","work1","wutao","org1","1948","0xhash","sigsigsig"]' 
+CHAINCODE_INVOKE_ARGS_2='["regist","work2","wutao","org1","1949","0xhash","sigsigsig"]' 
+CHAINCODE_INVOKE_ARGS_3='["regist","work3","wutao","org2","1950","0xhash","sigsigsig"]' 
 
 
 uplogd "clean"
@@ -175,21 +175,21 @@ _wait_seconds
 chaincode_query $CHANNEL_NAME $CHAINCODE_NAME $CHAINCODE_QUERY_ARGS $ORG2_NAME
 _wait_seconds
 
-echo
-echo ">>>>>>>>>>>>>>>>>>>>>>  Org 1 step 3  <<<<<<<<<<<<<<<<<<<<<<<"
-channel_remove_org $CHANNEL_NAME $ORDERER_ADDRESS $ORG2_MSP $ORG1_NAME $ORDERER_NAME $ORDERER_DOMAIN
-_wait_seconds
+# echo
+# echo ">>>>>>>>>>>>>>>>>>>>>>  Org 1 step 3  <<<<<<<<<<<<<<<<<<<<<<<"
+# channel_remove_org $CHANNEL_NAME $ORDERER_ADDRESS $ORG2_MSP $ORG1_NAME $ORDERER_NAME $ORDERER_DOMAIN
+# _wait_seconds
 
-chaincode_invoke $CHANNEL_NAME $CHAINCODE_NAME $CHAINCODE_INVOKE_ARGS_3 $ORG1_NAME $ORDERER_NAME $ORDERER_DOMAIN
-_wait_seconds
+# chaincode_invoke $CHANNEL_NAME $CHAINCODE_NAME $CHAINCODE_INVOKE_ARGS_3 $ORG1_NAME $ORDERER_NAME $ORDERER_DOMAIN
+# _wait_seconds
 
-chaincode_query $CHANNEL_NAME $CHAINCODE_NAME $CHAINCODE_QUERY_ARGS $ORG1_NAME
-_wait_seconds
+# chaincode_query $CHANNEL_NAME $CHAINCODE_NAME $CHAINCODE_QUERY_ARGS $ORG1_NAME
+# _wait_seconds
 
-echo
-echo ">>>>>>>>>>>>>>>>>>>>>>  Org 2 step 4  <<<<<<<<<<<<<<<<<<<<<<<"
-chaincode_query $CHANNEL_NAME $CHAINCODE_NAME $CHAINCODE_QUERY_ARGS $ORG2_NAME
-_wait_seconds
+# echo
+# echo ">>>>>>>>>>>>>>>>>>>>>>  Org 2 step 4  <<<<<<<<<<<<<<<<<<<<<<<"
+# chaincode_query $CHANNEL_NAME $CHAINCODE_NAME $CHAINCODE_QUERY_ARGS $ORG2_NAME
+# _wait_seconds
 
 echo ">>>>>>>>>>>>>>>>>>>>>>  Done  <<<<<<<<<<<<<<<<<<<<<<<"
 

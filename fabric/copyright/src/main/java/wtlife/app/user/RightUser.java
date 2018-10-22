@@ -1,6 +1,5 @@
-package main.app.user;
+package wtlife.app.user;
 
-import main.app.client.FabricClient;
 import org.apache.log4j.Logger;
 import org.hyperledger.fabric.sdk.Enrollment;
 import org.hyperledger.fabric.sdk.User;
@@ -19,33 +18,45 @@ import java.util.Set;
 
 public class RightUser implements User {
     private static Logger logger = Logger.getLogger(RightUser.class);
-    public String CERTDIR = FabricClient.class.getResource("/").getPath();
+
+    public String CERTDIR = new File(System.getProperty("user.dir")).getParent();
+
     private String certfilepath;
     private String keyfilepath;
     private final String userName;
     private String mspid;
 
     public RightUser(String USERTYPE, String userName, String mspid) {
-        String certfilepath1;
-        if ("peer".equals(USERTYPE)) {
-            CERTDIR = CERTDIR + "/crypto-config/peerOrganizations";
-        } else if ("orderer".equals(USERTYPE)) {
-            CERTDIR = CERTDIR + "/crypto-config/ordererOrganizations";
-        }
+
         if (mspid.equals("org1MSP")) {
-            certfilepath = CERTDIR + "/org1.example.com/users/" + userName + "@org1.example.com/msp/signcerts/";
+            CERTDIR = CERTDIR + "/workspaces/right/crypto-config";
+        } else if (mspid.equals("org2MSP")) {
+            CERTDIR = CERTDIR + "/workspaces/press1/crypto-config";
+        }
+
+
+        if ("peer".equals(USERTYPE)) {
+            CERTDIR = CERTDIR + "/peerOrganizations";
+        } else if ("orderer".equals(USERTYPE)) {
+            CERTDIR = CERTDIR + "/ordererOrganizations";
+        }
+
+
+        if (mspid.equals("org1MSP")) {
+            certfilepath = CERTDIR + "/org1.right.com/users/" + userName + "@org1.right.com/msp/signcerts/";
             File skfile = new File(certfilepath);
             certfilepath = certfilepath + skfile.listFiles()[0].getName();
 
-            keyfilepath = CERTDIR + "/org1.example.com/users/" + userName + "@org1.example.com/msp/keystore/";
+            keyfilepath = CERTDIR + "/org1.right.com/users/" + userName + "@org1.right.com/msp/keystore/";
             File keyfile = new File(keyfilepath);
+            System.out.println(keyfilepath);
             keyfilepath = keyfilepath + keyfile.listFiles()[0].getName();
-        } else {
-            certfilepath = CERTDIR + "/org2.example.com/users/" + userName + "@org2.example.com/msp/signcerts/";
+        } else if (mspid.equals("org2MSP")) {
+            certfilepath = CERTDIR + "/org2.right.com/users/" + userName + "@org2.right.com/msp/signcerts/";
             File skfile = new File(certfilepath);
             certfilepath = certfilepath + skfile.listFiles()[0].getName();
 
-            keyfilepath = CERTDIR + "/org2.example.com/users/" + userName + "@org2.example.com/msp/keystore/";
+            keyfilepath = CERTDIR + "/org2.right.com/users/" + userName + "@org2.right.com/msp/keystore/";
             File keyfile = new File(keyfilepath);
             keyfilepath = keyfilepath + keyfile.listFiles()[0].getName();
         }
@@ -131,7 +142,7 @@ public class RightUser implements User {
             //
             byte[] encoded = DatatypeConverter.parseBase64Binary(builder.toString());
             PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(encoded);
-            KeyFactory kf = KeyFactory.getInstance("ECDSA");
+            KeyFactory kf = KeyFactory.getInstance("EC");
             key = kf.generatePrivate(keySpec);
         } finally {
             is.close();

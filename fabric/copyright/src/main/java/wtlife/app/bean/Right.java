@@ -1,12 +1,21 @@
-package main.app.bean;
+package wtlife.app.bean;
 
 public class Right {
     public String Name;
     public String Author;
     public String Press;
-    public Integer TimeStamp;
+    public int TimeStamp;
     public String Hash;
     public String Signature;
+
+    public Right(String name, String author, String press, int timeStamp, String hash, String signature) {
+        Name = name;
+        Author = author;
+        Press = press;
+        TimeStamp = timeStamp;
+        Hash = hash;
+        Signature = signature;
+    }
 
     public String getName() {
         return Name;
