@@ -10,6 +10,7 @@ import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
 import org.hyperledger.fabric.sdk.exception.ProposalException;
 import org.hyperledger.fabric.sdk.security.CryptoSuite;
 
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.util.Collection;
 import java.util.HashMap;
@@ -55,7 +56,7 @@ public class FabricClient {
         client.setUserContext(peer0org1);
     }
 
-    public static void regist(Channel channel, Right right) throws InvalidArgumentException, ProposalException {
+    public static void regist(Channel channel, Right right) throws InvalidArgumentException, ProposalException, UnsupportedEncodingException {
         TransactionProposalRequest req = client.newTransactionProposalRequest();
         req.setChaincodeID(cid);
         req.setFcn("regist");
@@ -74,6 +75,12 @@ public class FabricClient {
             if (resp.getStatus() == ProposalResponse.Status.SUCCESS) {
                 System.out.format("Registing the work:%s \n", req.getArgs());
                 System.out.format("Successful transaction proposal response Txid: %s from peer %s\n", resp.getTransactionID(), resp.getPeer());
+                byte[] x=resp.getChaincodeActionResponsePayload();
+                String resultAsString=null;
+                if (x != null) {
+                    resultAsString = new String(x, "UTF-8");
+                }
+                System.out.format("Invoke transanction prosal response Txid: %s",resultAsString);
             } else {
                 throw new RuntimeException(resp.getMessage());
             }
@@ -95,9 +102,9 @@ public class FabricClient {
         Collection<ProposalResponse> resps = channel.queryByChaincode(req);
         for (ProposalResponse resp : resps) {
             String payload = new String(resp.getChaincodeActionResponsePayload());
-            logger.info("response: " + payload);
-            System.out.println(resp.getProposalResponse().getResponse().getPayload().toStringUtf8());
+            System.out.format("response:%s \n" , payload);
         }
     }
+
 
 }

@@ -17,7 +17,7 @@ public class AppTest {
     private static String CONNFIG_Orderer = "grpc://127.0.0.1:7050";
     private static String CONNFIG_Peer0Org1 = "grpc://127.0.0.1:11051";
     private static String CHANNELID = "mychannel";
-    private static Right right = new Right("work1", "wutao", "org1", 1000, "0xhash", "sigsigsig");
+    private static Right right = new Right("work1", "wutao", "center", 0, "0xhash", "sigsigsig");
 
     @Before
     public void Setup() throws Exception {

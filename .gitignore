@@ -1,8 +1,9 @@
-paper
 workspaces
 fabric/attribute_backend
 fabric/peer_portal
-fabric/.idea
+fabric/copyright/.idea
+fabric/copyright/target
 
+*.log
 *.iml
 *.class

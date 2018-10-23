@@ -64,10 +64,10 @@ CHAINCODE_VERSION_2_POLICY="OR ('"${ORG1_MSP}".peer','"${ORG2_MSP}".peer')"
 CHAINCODE_PATH="rightcc"
 CHAINCODE_NAME="myrightcc"
 CHAINCODE_EMPTY_ARGS='[]'
-CHAINCODE_QUERY_ARGS='["queryRightByName","work1","wutao","org1"]'
-CHAINCODE_INVOKE_ARGS_1='["regist","work1","wutao","org1","1948","0xhash","sigsigsig"]' 
-CHAINCODE_INVOKE_ARGS_2='["regist","work2","wutao","org1","1949","0xhash","sigsigsig"]' 
-CHAINCODE_INVOKE_ARGS_3='["regist","work3","wutao","org2","1950","0xhash","sigsigsig"]' 
+CHAINCODE_QUERY_ARGS='["queryRightByName","work1","wutao","center"]'
+CHAINCODE_INVOKE_ARGS_1='["regist","work1","wutao","center","0","0xhash","sigsigsig"]' 
+CHAINCODE_INVOKE_ARGS_2='["regist","work2","wutao","center","0","0xhash","sigsigsig"]' 
+CHAINCODE_INVOKE_ARGS_3='["regist","work3","wutao","center","0","0xhash","sigsigsig"]' 
 
 uplogd "clean"
 if [ "$workspaces_path" == "" ] || [ "$workspaces_path" == "/" ]; then

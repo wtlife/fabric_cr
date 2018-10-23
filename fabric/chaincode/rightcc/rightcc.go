@@ -13,12 +13,12 @@ type RightChaincode struct {
 }
 
 type Right struct {
-	Name      string `json:"name"`
-	Author    string `json:"author"`
-	Press     string `json:"press"`
-	Timestamp int64  `json:"ts"` //
-	Hash      string `json:"hash"`
-	Signature string `json:"sig"`
+	Name      string `json:"Name"`
+	Author    string `json:"Author"`
+	Press     string `json:"Press"`
+	Timestamp int64  `json:"Ts"` //
+	Hash      string `json:"Hash"`
+	Signature string `json:"Sig"`
 }
 
 func main() {
@@ -40,11 +40,15 @@ func (rc *RightChaincode) Invoke(stub shim.ChaincodeStubInterface) peer.Response
 		if len(args) != 6 {
 			return shim.Error("There must be 6 parameters")
 		}
-		ts, err := strconv.ParseInt(args[3], 10, 64)
+		_, err := strconv.ParseInt(args[3], 10, 64)
 		if err != nil {
-			return shim.Error(args[3] + "is not a number!")
+			return shim.Error(args[3] + "Input Timestamp Error!")
 		}
-		right := &Right{args[0], args[1], args[2], ts, args[4], args[5]}
+		ts, err := stub.GetTxTimestamp()
+		if err != nil {
+			return shim.Error("Get TimeStamp Error" + err.Error())
+		}
+		right := &Right{args[0], args[1], args[2], ts.Seconds, args[4], args[5]}
 		return rc.regist(stub, right)
 	case "queryRightByName":
 		if len(args) != 3 {
@@ -70,16 +74,15 @@ func (rc *RightChaincode) regist(stub shim.ChaincodeStubInterface, right *Right)
 	if err != nil {
 		return shim.Error(err.Error())
 	}
-	strconv.FormatInt(right.Timestamp, 10)
+
 	bytesValue, err := json.Marshal(right)
 	if err != nil {
-		fmt.Println("ERROR!")
-		return shim.Error(err.Error())
+		return shim.Error("Get json Error" + err.Error())
 	}
 
 	stub.PutState(indexKey, bytesValue)
 	stub.SetEvent("Regist right!", []byte(indexKey))
-	return shim.Success(nil)
+	return shim.Success([]byte(stub.GetTxID()))
 }
 
 func (rc *RightChaincode) queryRightByName(stub shim.ChaincodeStubInterface, name string, author string, press string) (string, error) {
