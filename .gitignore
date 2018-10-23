@@ -1,6 +1,4 @@
 workspaces
-fabric/attribute_backend
-fabric/peer_portal
 fabric/copyright/.idea
 fabric/copyright/target
 
