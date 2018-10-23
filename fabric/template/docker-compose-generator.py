@@ -53,7 +53,7 @@ def generate_cli_config(org_domain, org_msp, org_name):
     env.append('CORE_PEER_ADDRESS=peer0.{domain}:7051'.format(
         domain=org_domain))
     env.append('CORE_PEER_LOCALMSPID={msp}'.format(msp=org_msp))
-    env.append('CORE_PEER_TLS_ENABLED=true')
+    env.append('CORE_PEER_TLS_ENABLED=false')
     env.append('CORE_PEER_TLS_CERT_FILE={peer_org_dir}/{domain}/peers/peer0.{domain}/tls/server.crt'.format(
         peer_org_dir=PEER_ORG_DIR, domain=org_domain))
     env.append('CORE_PEER_TLS_KEY_FILE={peer_org_dir}/{domain}/peers/peer0.{domain}/tls/server.key'.format(
@@ -130,7 +130,7 @@ def generate_orderer_config(orderer_domain, orderer_msp, orderer_name, outer_por
     env.append('ORDERER_GENERAL_LOCALMSPID={orderer_msp}'.format(
         orderer_msp=orderer_msp))
     env.append('ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp')
-    env.append('ORDERER_GENERAL_TLS_ENABLED=true')
+    env.append('ORDERER_GENERAL_TLS_ENABLED=false')
     env.append(
         'ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key')
     env.append(
@@ -248,7 +248,7 @@ def generate_peer_config(org_domain, org_msp, org_peer_index, org_peer_outer_705
     env.append('CORE_PEER_GOSSIP_USELEADERELECTION=true')
     env.append('CORE_PEER_GOSSIP_ORGLEADER=false')
     env.append('CORE_PEER_PROFILE_ENABLED=true')
-    env.append('CORE_PEER_TLS_ENABLED=true')
+    env.append('CORE_PEER_TLS_ENABLED=false')
     env.append('CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt')
     env.append('CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key')
     env.append('CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt')

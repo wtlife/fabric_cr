@@ -17,7 +17,7 @@ public class Config {
         Org org1 = new Org("org1", "org1MSP");
         org1.addPeerLocation("peer0.org1.right.com", "grpc://127.0.0.1:11051");
         org1.addPeerLocation("peer1.org1.right.com", "grpc://127.0.0.1:11053");
-        org1.addOrdererLocation("orderer", "grpc://127.0.0.1:7050");
+        org1.addOrdererLocation("orderer.right.com", "grpc://127.0.0.1:7050");
         RightUser Adminorg1 = new RightUser("peer", "Admin", "org1MSP");
         org1.addUser(Adminorg1);
         org1.setAdmin(Adminorg1);
@@ -26,7 +26,7 @@ public class Config {
         Org org2 = new Org("org2", "org2MSP");
         org2.addPeerLocation("peer0.org2.right.com", "grpc://127.0.0.1:14052");
         org2.addPeerLocation("peer1.org2.right.com", "grpc://127.0.0.1:14054");
-        org2.addOrdererLocation("orderer", "grpc://127.0.0.1:7050");
+        org2.addOrdererLocation("orderer.right.com", "grpc://127.0.0.1:7050");
         RightUser Adminorg2 = new RightUser("peer", "Admin", "org2MSP");
         RightUser User1org2 = new RightUser("peer", "User1", "org2MSP");
         org2.addUser(Adminorg2);

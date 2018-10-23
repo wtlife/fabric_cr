@@ -18,10 +18,10 @@ import java.util.UUID;
 public class AppTest {
     private static Logger logger = Logger.getLogger(AppTest.class);
     private static String CONNFIG_Orderer = "grpc://127.0.0.1:7050";
-    private static String CONNFIG_Peer0Org1 = "grpc://127.0.0.1:7051";
-    private static String CONNFIG_Peer1Org1 = "grpc://127.0.0.1:7053";
-    private static String CONNFIG_Peer0Org2 = "grpc://127.0.0.1:7052";
-    private static String CONNFIG_Peer1Org2 = "grpc://127.0.0.1:7054";
+    private static String CONNFIG_Peer0Org1 = "grpc://127.0.0.1:11051";
+    private static String CONNFIG_Peer1Org1 = "grpc://127.0.0.1:11053";
+    private static String CONNFIG_Peer0Org2 = "grpc://127.0.0.1:14052";
+    private static String CONNFIG_Peer1Org2 = "grpc://127.0.0.1:14054";
     private static String CHANNELID = "mychannel";
     private static Right right = new Right("work1", "wutao", "org1", 1000, "0xhash", "sigsigsig");
 
@@ -41,7 +41,7 @@ public class AppTest {
         logger.debug("测试Fabric插入功能");
         Channel channel = FabricClient.client.newChannel(CHANNELID);
         channel.addPeer(FabricClient.client.newPeer("peer0.org1.right.com", CONNFIG_Peer0Org1));
-        channel.addOrderer(FabricClient.client.newOrderer("orderer", CONNFIG_Orderer));
+        channel.addOrderer(FabricClient.client.newOrderer("orderer.right.com", CONNFIG_Orderer));
         channel.initialize();
         FabricClient.regist(channel, right);
     }
@@ -53,8 +53,8 @@ public class AppTest {
     public void TestChainCodeQuery() throws Exception {
         logger.debug("测试Fabric 查询功能");
         Channel channel = FabricClient.client.newChannel(Config.CHANNELNAME);
-        channel.addPeer(FabricClient.client.newPeer("peer0.org2.right.com", FabricClient.orgHashMap.get("org1").getPeerLocation("peer0")));
-        channel.addOrderer(FabricClient.client.newOrderer("orderer", FabricClient.orgHashMap.get("org1").getOrdererLocation("orderer")));
+        channel.addPeer(FabricClient.client.newPeer("peer0.org1.right.com", FabricClient.orgHashMap.get("org1").getPeerLocation("peer0.org1.right.com")));
+        channel.addOrderer(FabricClient.client.newOrderer("orderer.org1.right.com", FabricClient.orgHashMap.get("org1").getOrdererLocation("orderer.right.com")));
         channel.initialize();
         FabricClient.query(channel, right);
     }

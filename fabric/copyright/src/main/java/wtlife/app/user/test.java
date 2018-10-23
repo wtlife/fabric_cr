@@ -12,8 +12,9 @@ public class test {
 //        path = path+ "Admin@"+"org1.right.com"+"/msp"+"/signcerts";
 //        File key = new File(path);
 //        System.out.println(key.getPath()+key.listFiles()[0].getName());
-        Right right = new Right("work1", "wutao", "org1", 1000, "0xhash", "sigsigsig");
-        System.out.println(right.toStringArray());
+//        Right right = new Right("work1", "wutao", "org1", 1000, "0xhash", "sigsigsig");
+//        System.out.println(right.toStringArray());
+        System.out.println(test.class.getResource("").getPath());
 
     }
 }

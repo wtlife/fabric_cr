@@ -1,5 +1,6 @@
 package wtlife.app.client;
 
+import org.hyperledger.fabric.protos.peer.FabricProposalResponse;
 import wtlife.app.bean.Right;
 import wtlife.app.org.Org;
 import wtlife.app.config.Config;
@@ -18,7 +19,9 @@ import java.util.Map;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class FabricClient {
-
+    private static final long PROPOSAL_WAIT_TIME = 60000 * 5;
+    private static final String EXPECTED_EVENT_NAME = "event";
+    private static final byte[] EXPECTED_EVENT_DATA = "!".getBytes(UTF_8);
     private static Logger logger = Logger.getLogger(FabricClient.class);
     public static HFClient client = null;
     public static CryptoSuite cs;
@@ -57,6 +60,7 @@ public class FabricClient {
         TransactionProposalRequest req = client.newTransactionProposalRequest();
         req.setChaincodeID(cid);
         req.setFcn("regist");
+        req.setProposalWaitTime(PROPOSAL_WAIT_TIME);
 //        req.setArgs(right.toStringArray());
         req.setArgs("work1", "wutao", "org1", "1000", "0xhash", "sigsigsig");
 
@@ -64,20 +68,26 @@ public class FabricClient {
         tm.put("HyperLedgerFabric", "TransactionProposalRequest:JavaSDK".getBytes(UTF_8));
         tm.put("method", "TransactionProposalRequest".getBytes(UTF_8));
         tm.put("result", ":)".getBytes(UTF_8));
+        tm.put(EXPECTED_EVENT_NAME, EXPECTED_EVENT_DATA);
         req.setTransientMap(tm);
         Collection<ProposalResponse> resps = channel.sendTransactionProposal(req);
         for (ProposalResponse resp : resps) {
-            String payload = new String(resp.getChaincodeActionResponsePayload());
-            logger.debug("response: " + payload);
+//            String payload = new String(resp.getChaincodeActionResponsePayload());
+//            logger.debug("response: " + payload);
+            if (resp.getStatus()== ProposalResponse.Status.SUCCESS){
+                logger.debug("Successful transaction proposal response Txid: %s from peer %s");
+            }else{
+                logger.debug("Failed transanction");
+            }
+
         }
-        channel.sendTransaction(resps);
     }
 
     public static void query(Channel channel, Right right) throws Exception {
         QueryByChaincodeRequest req = client.newQueryProposalRequest();
         ChaincodeID cid = ChaincodeID.newBuilder().setName(Config.CHAINCODENAME).setVersion(Config.CHAINCODEVERSION).build();
         req.setChaincodeID(cid);
-        req.setFcn("query");
+        req.setFcn("queryRightByName");
         req.setArgs(new String[]{
                 right.getName(),
                 right.getAuthor(),
