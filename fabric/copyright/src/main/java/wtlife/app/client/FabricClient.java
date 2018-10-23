@@ -1,6 +1,5 @@
 package wtlife.app.client;
 
-import org.hyperledger.fabric.protos.peer.FabricProposalResponse;
 import wtlife.app.bean.Right;
 import wtlife.app.org.Org;
 import wtlife.app.config.Config;
@@ -61,8 +60,7 @@ public class FabricClient {
         req.setChaincodeID(cid);
         req.setFcn("regist");
         req.setProposalWaitTime(PROPOSAL_WAIT_TIME);
-//        req.setArgs(right.toStringArray());
-        req.setArgs("work1", "wutao", "org1", "1000", "0xhash", "sigsigsig");
+        req.setArgs(right.toStringArray());
 
         Map<String, byte[]> tm = new HashMap<>();
         tm.put("HyperLedgerFabric", "TransactionProposalRequest:JavaSDK".getBytes(UTF_8));
@@ -70,14 +68,14 @@ public class FabricClient {
         tm.put("result", ":)".getBytes(UTF_8));
         tm.put(EXPECTED_EVENT_NAME, EXPECTED_EVENT_DATA);
         req.setTransientMap(tm);
+
         Collection<ProposalResponse> resps = channel.sendTransactionProposal(req);
         for (ProposalResponse resp : resps) {
-//            String payload = new String(resp.getChaincodeActionResponsePayload());
-//            logger.debug("response: " + payload);
-            if (resp.getStatus()== ProposalResponse.Status.SUCCESS){
-                logger.debug("Successful transaction proposal response Txid: %s from peer %s");
-            }else{
-                logger.debug("Failed transanction");
+            if (resp.getStatus() == ProposalResponse.Status.SUCCESS) {
+                System.out.format("Registing the work:%s \n", req.getArgs());
+                System.out.format("Successful transaction proposal response Txid: %s from peer %s\n", resp.getTransactionID(), resp.getPeer());
+            } else {
+                throw new RuntimeException(resp.getMessage());
             }
 
         }
@@ -93,11 +91,12 @@ public class FabricClient {
                 right.getAuthor(),
                 right.getPress()
         });
-        System.out.println("Querying for " + right.getName());
+        logger.info("Querying for " + right.getName());
         Collection<ProposalResponse> resps = channel.queryByChaincode(req);
         for (ProposalResponse resp : resps) {
             String payload = new String(resp.getChaincodeActionResponsePayload());
-            logger.debug("response: " + payload);
+            logger.info("response: " + payload);
+            System.out.println(resp.getProposalResponse().getResponse().getPayload().toStringUtf8());
         }
     }
 

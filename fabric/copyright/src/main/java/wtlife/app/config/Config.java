@@ -14,21 +14,21 @@ public class Config {
 
     public static HashMap<String, Org> getConfigure() throws MalformedURLException, InvalidArgumentException {
         HashMap<String, Org> orgHashMap = new HashMap<>();
-        Org org1 = new Org("org1", "org1MSP");
-        org1.addPeerLocation("peer0.org1.right.com", "grpc://127.0.0.1:11051");
-        org1.addPeerLocation("peer1.org1.right.com", "grpc://127.0.0.1:11053");
-        org1.addOrdererLocation("orderer.right.com", "grpc://127.0.0.1:7050");
-        RightUser Adminorg1 = new RightUser("peer", "Admin", "org1MSP");
+        Org org1 = new Org("center", "centerMSP");
+        org1.addPeerLocation("peer0.center.copyright.com", "grpc://127.0.0.1:11051");
+        org1.addPeerLocation("peer1.center.copyright.com", "grpc://127.0.0.1:11053");
+        org1.addOrdererLocation("orderer.copyright.com", "grpc://127.0.0.1:7050");
+        RightUser Adminorg1 = new RightUser("peer", "Admin", "centerMSP");
         org1.addUser(Adminorg1);
         org1.setAdmin(Adminorg1);
 
 
-        Org org2 = new Org("org2", "org2MSP");
-        org2.addPeerLocation("peer0.org2.right.com", "grpc://127.0.0.1:14052");
-        org2.addPeerLocation("peer1.org2.right.com", "grpc://127.0.0.1:14054");
-        org2.addOrdererLocation("orderer.right.com", "grpc://127.0.0.1:7050");
-        RightUser Adminorg2 = new RightUser("peer", "Admin", "org2MSP");
-        RightUser User1org2 = new RightUser("peer", "User1", "org2MSP");
+        Org org2 = new Org("press1", "press1MSP");
+        org2.addPeerLocation("peer0.center.copyright.com", "grpc://127.0.0.1:14052");
+        org2.addPeerLocation("peer1.center.copyright.com", "grpc://127.0.0.1:14054");
+        org2.addOrdererLocation("orderer.copyright.com", "grpc://127.0.0.1:7050");
+        RightUser Adminorg2 = new RightUser("peer", "Admin", "press1MSP");
+        RightUser User1org2 = new RightUser("peer", "User1", "press1MSP");
         org2.addUser(Adminorg2);
         org2.addUser(User1org2);
         org2.setAdmin(Adminorg2);

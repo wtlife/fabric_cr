@@ -13,34 +13,28 @@ uplogd "$0"
 export FABRIC_LOCAL_CTNR='YES'
 
 workspaces_path="$root_path/workspaces"
-ORG1_PATH="$workspaces_path/right"
+ORG1_PATH="$workspaces_path/center"
 ORG2_PATH="$workspaces_path/press1"
-#ORG3_PATH="$workspaces_path/press2"
-#ORG4_PATH="$workspaces_path/press3"
 
 mkdir -p $ORG1_PATH
 mkdir -p $ORG2_PATH
-#mkdir -p $ORG3_PATH
-#mkdir -p $ORG4_PATH
 
 echo $workspaces_path
 echo $ORG1_PATH
 echo $ORG2_PATH
-#echo $ORG3_PATH
-#echo $ORG4_PATH
 
 # Parameter:
 CONSORTIUM=SamConsortium
 
 #ORDERER
 ORDERER_NAME=orderer
-ORDERER_DOMAIN=right.com
-ORDERER_MSP=rightMSP
+ORDERER_DOMAIN=copyright.com
+ORDERER_MSP=copyrightMSP
 orderer_port=7050
 ORDERER_ADDRESS=${ORDERER_NAME}.$ORDERER_DOMAIN:${orderer_port}
 
 #ORG1
-ORG1_NAME=org1
+ORG1_NAME=center
 ORG1_DOMAIN=${ORG1_NAME}.${ORDERER_DOMAIN}
 ORG1_MSP=${ORG1_NAME}MSP
 ORG1_PEER_COUNT=2
@@ -49,7 +43,7 @@ ORG1_PEER_OUTER_PORT2=11053
 COUCHDB1_PORT=5984
 
 #ORG2
-ORG2_NAME=org2
+ORG2_NAME=press1
 ORG2_DOMAIN=$ORG2_NAME.$ORDERER_DOMAIN
 ORG2_MSP=${ORG2_NAME}MSP
 ORG2_PEER_COUNT=2
@@ -66,15 +60,6 @@ CHAINCODE_VERSION_1_POLICY="OR ('"${ORG1_MSP}".peer')"
 CHAINCODE_VERSION_2="2.0"
 CHAINCODE_VERSION_2_POLICY="OR ('"${ORG1_MSP}".peer','"${ORG2_MSP}".peer')" 
 
-# digest chaincode
-# CHAINCODE_PATH="digestcc"
-# CHAINCODE_NAME="mydigestcc"
-# CHAINCODE_EMPTY_ARGS='[]'
-# CHAINCODE_QUERY_ARGS='["queryDataByTimeRange","1","3"]' 
-# CHAINCODE_INVOKE_ARGS_1='["appendDigestData","1","1","a","b","c","d"]' 
-# CHAINCODE_INVOKE_ARGS_2='["appendDigestData","2","2","a","b","c","d"]' 
-# CHAINCODE_INVOKE_ARGS_3='["appendDigestData","3","3","a","3","c","d"]' 
-
 # right chaincode
 CHAINCODE_PATH="rightcc"
 CHAINCODE_NAME="myrightcc"
@@ -83,7 +68,6 @@ CHAINCODE_QUERY_ARGS='["queryRightByName","work1","wutao","org1"]'
 CHAINCODE_INVOKE_ARGS_1='["regist","work1","wutao","org1","1948","0xhash","sigsigsig"]' 
 CHAINCODE_INVOKE_ARGS_2='["regist","work2","wutao","org1","1949","0xhash","sigsigsig"]' 
 CHAINCODE_INVOKE_ARGS_3='["regist","work3","wutao","org2","1950","0xhash","sigsigsig"]' 
-
 
 uplogd "clean"
 if [ "$workspaces_path" == "" ] || [ "$workspaces_path" == "/" ]; then
@@ -171,7 +155,6 @@ _wait_seconds
 chaincode_invoke $CHANNEL_NAME $CHAINCODE_NAME $CHAINCODE_INVOKE_ARGS_2 $ORG2_NAME  $ORDERER_NAME $ORDERER_DOMAIN
 _wait_seconds
 
-
 chaincode_query $CHANNEL_NAME $CHAINCODE_NAME $CHAINCODE_QUERY_ARGS $ORG2_NAME
 _wait_seconds
 
@@ -192,5 +175,4 @@ _wait_seconds
 # _wait_seconds
 
 echo ">>>>>>>>>>>>>>>>>>>>>>  Done  <<<<<<<<<<<<<<<<<<<<<<<"
-
 exit 0

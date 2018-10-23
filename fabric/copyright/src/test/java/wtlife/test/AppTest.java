@@ -1,6 +1,5 @@
 package wtlife.test;
 
-
 import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.apache.log4j.Logger;
 import org.hyperledger.fabric.sdk.Channel;
@@ -10,8 +9,6 @@ import wtlife.app.bean.Right;
 import wtlife.app.client.FabricClient;
 import wtlife.app.config.Config;
 
-import java.util.UUID;
-
 /**
  * Unit test for simple App.
  */
@@ -19,9 +16,6 @@ public class AppTest {
     private static Logger logger = Logger.getLogger(AppTest.class);
     private static String CONNFIG_Orderer = "grpc://127.0.0.1:7050";
     private static String CONNFIG_Peer0Org1 = "grpc://127.0.0.1:11051";
-    private static String CONNFIG_Peer1Org1 = "grpc://127.0.0.1:11053";
-    private static String CONNFIG_Peer0Org2 = "grpc://127.0.0.1:14052";
-    private static String CONNFIG_Peer1Org2 = "grpc://127.0.0.1:14054";
     private static String CHANNELID = "mychannel";
     private static Right right = new Right("work1", "wutao", "org1", 1000, "0xhash", "sigsigsig");
 
@@ -40,8 +34,8 @@ public class AppTest {
     public void TestChainCodeInstert() throws Exception {
         logger.debug("测试Fabric插入功能");
         Channel channel = FabricClient.client.newChannel(CHANNELID);
-        channel.addPeer(FabricClient.client.newPeer("peer0.org1.right.com", CONNFIG_Peer0Org1));
-        channel.addOrderer(FabricClient.client.newOrderer("orderer.right.com", CONNFIG_Orderer));
+        channel.addPeer(FabricClient.client.newPeer("peer0.center.copyright.com", CONNFIG_Peer0Org1));
+        channel.addOrderer(FabricClient.client.newOrderer("orderer.copyright.com", CONNFIG_Orderer));
         channel.initialize();
         FabricClient.regist(channel, right);
     }
@@ -51,10 +45,10 @@ public class AppTest {
      */
     @Test
     public void TestChainCodeQuery() throws Exception {
-        logger.debug("测试Fabric 查询功能");
+        logger.info("测试Fabric 查询功能");
         Channel channel = FabricClient.client.newChannel(Config.CHANNELNAME);
-        channel.addPeer(FabricClient.client.newPeer("peer0.org1.right.com", FabricClient.orgHashMap.get("org1").getPeerLocation("peer0.org1.right.com")));
-        channel.addOrderer(FabricClient.client.newOrderer("orderer.org1.right.com", FabricClient.orgHashMap.get("org1").getOrdererLocation("orderer.right.com")));
+        channel.addPeer(FabricClient.client.newPeer("peer0.center.copyright.com", CONNFIG_Peer0Org1));
+        channel.addOrderer(FabricClient.client.newOrderer("orderer.copyright.com", CONNFIG_Orderer));
         channel.initialize();
         FabricClient.query(channel, right);
     }
@@ -67,15 +61,13 @@ public class AppTest {
     public void TestChainCodeRegist() throws Exception {
         logger.debug("测试Fabric 循环插入1000个值测试监控值是否包含变化");
         Channel channel = FabricClient.client.newChannel(CHANNELID);
-        channel.addPeer(FabricClient.client.newPeer("peer", CONNFIG_Peer0Org1));
-        channel.addOrderer(FabricClient.client.newOrderer("orderer", CONNFIG_Orderer));
+        channel.addPeer(FabricClient.client.newPeer("peer0.center.copyright.com", CONNFIG_Peer0Org1));
+        channel.addOrderer(FabricClient.client.newOrderer("orderer.copyright.com", CONNFIG_Orderer));
         channel.initialize();
         for (int i = 0; i < 1000; i++) {
-            Right right = new Right("work","wutao","",i,"0xhash","sigsig");
+            Right right = new Right("work", "wutao", "", i, "0xhash", "sigsig");
             FabricClient.regist(channel, right);
         }
         logger.debug("测试完成");
     }
-
-
 }
