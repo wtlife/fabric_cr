@@ -75,12 +75,12 @@ public class FabricClient {
             if (resp.getStatus() == ProposalResponse.Status.SUCCESS) {
                 System.out.format("Registing the work:%s \n", req.getArgs());
                 System.out.format("Successful transaction proposal response Txid: %s from peer %s\n", resp.getTransactionID(), resp.getPeer());
-                byte[] x=resp.getChaincodeActionResponsePayload();
-                String resultAsString=null;
+                byte[] x = resp.getChaincodeActionResponsePayload();
+                String payload = null;
                 if (x != null) {
-                    resultAsString = new String(x, "UTF-8");
+                    payload = new String(x, "UTF-8");
                 }
-                System.out.format("Invoke transanction prosal response Txid: %s",resultAsString);
+                System.out.format("Invoke transanction prosal response Txid: %s", payload);
             } else {
                 throw new RuntimeException(resp.getMessage());
             }
@@ -98,13 +98,16 @@ public class FabricClient {
                 right.getAuthor(),
                 right.getPress()
         });
-        logger.info("Querying for " + right.getName());
+        System.out.println("Querying for " + right.getName());
         Collection<ProposalResponse> resps = channel.queryByChaincode(req);
         for (ProposalResponse resp : resps) {
-            String payload = new String(resp.getChaincodeActionResponsePayload());
-            System.out.format("response:%s \n" , payload);
+
+            byte[] x = resp.getChaincodeActionResponsePayload();
+            String payload = null;
+            if (x != null) {
+                payload = new String(x, "UTF-8");
+            }
+            System.out.format("response:%s \n", payload);
         }
     }
-
-
 }

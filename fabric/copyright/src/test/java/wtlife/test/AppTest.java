@@ -21,7 +21,7 @@ public class AppTest {
 
     @Before
     public void Setup() throws Exception {
-        logger.debug("Fabric Test Init........");
+        System.out.println("Fabric Test Init........");
         FabricClient fabricClient = new FabricClient();
         FabricClient.init();
     }
@@ -51,23 +51,5 @@ public class AppTest {
         channel.addOrderer(FabricClient.client.newOrderer("orderer.copyright.com", CONNFIG_Orderer));
         channel.initialize();
         FabricClient.query(channel, right);
-    }
-
-    /**
-     *
-     */
-    @Ignore
-    @Test
-    public void TestChainCodeRegist() throws Exception {
-        logger.debug("测试Fabric 循环插入1000个值测试监控值是否包含变化");
-        Channel channel = FabricClient.client.newChannel(CHANNELID);
-        channel.addPeer(FabricClient.client.newPeer("peer0.center.copyright.com", CONNFIG_Peer0Org1));
-        channel.addOrderer(FabricClient.client.newOrderer("orderer.copyright.com", CONNFIG_Orderer));
-        channel.initialize();
-        for (int i = 0; i < 1000; i++) {
-            Right right = new Right("work", "wutao", "", i, "0xhash", "sigsig");
-            FabricClient.regist(channel, right);
-        }
-        logger.debug("测试完成");
     }
 }
