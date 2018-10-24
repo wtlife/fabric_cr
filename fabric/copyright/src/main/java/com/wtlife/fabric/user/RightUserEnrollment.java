@@ -1,4 +1,4 @@
-package wtlife.app.user;
+package com.wtlife.fabric.user;
 
 import org.hyperledger.fabric.sdk.Enrollment;
 

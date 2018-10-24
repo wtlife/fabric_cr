@@ -1,8 +1,8 @@
-package wtlife.app.client;
+package com.wtlife.fabric.client;
 
-import wtlife.app.bean.Right;
-import wtlife.app.org.Org;
-import wtlife.app.config.Config;
+import com.wtlife.fabric.bean.Right;
+import com.wtlife.fabric.org.Org;
+import com.wtlife.fabric.config.Config;
 import org.apache.log4j.Logger;
 import org.hyperledger.fabric.sdk.*;
 import org.hyperledger.fabric.sdk.exception.CryptoException;

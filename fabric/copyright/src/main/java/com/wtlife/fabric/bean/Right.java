@@ -1,4 +1,4 @@
-package wtlife.app.bean;
+package com.wtlife.fabric.bean;
 
 public class Right {
     public String Name;

@@ -1,19 +1,19 @@
-package wtlife.test;
+package wtlife.com.fabric;
 
 import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.apache.log4j.Logger;
 import org.hyperledger.fabric.sdk.Channel;
 import org.junit.Before;
 import org.junit.Test;
-import wtlife.app.bean.Right;
-import wtlife.app.client.FabricClient;
-import wtlife.app.config.Config;
+import com.wtlife.fabric.bean.Right;
+import com.wtlife.fabric.client.FabricClient;
+import com.wtlife.fabric.config.Config;
 
 /**
- * Unit test for simple App.
+ * Unit fabrictest for simple App.
  */
-public class AppTest {
-    private static Logger logger = Logger.getLogger(AppTest.class);
+public class FabricTest {
+    private static Logger logger = Logger.getLogger(FabricTest.class);
     private static String CONNFIG_Orderer = "grpc://127.0.0.1:7050";
     private static String CONNFIG_Peer0Org1 = "grpc://127.0.0.1:11051";
     private static String CHANNELID = "mychannel";

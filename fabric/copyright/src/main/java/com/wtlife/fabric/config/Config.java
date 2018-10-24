@@ -1,7 +1,7 @@
-package wtlife.app.config;
+package com.wtlife.fabric.config;
 
-import wtlife.app.org.Org;
-import wtlife.app.user.RightUser;
+import com.wtlife.fabric.org.Org;
+import com.wtlife.fabric.user.RightUser;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
 
 import java.net.MalformedURLException;
