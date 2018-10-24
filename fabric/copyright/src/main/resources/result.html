@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <label for="username" th:text="'前端传递过来的name：'+${name}" >Name</label>
+            <label for="username" th:text="'前端传递过来的password：'+ ${password}" >Name</label>
+        </div>
+    </div>
+</div>
+</body>
+</html>
