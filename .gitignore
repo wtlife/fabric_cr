@@ -1,7 +1,20 @@
-workspaces
-fabric/copyright/.idea
-fabric/copyright/target
+### IntelliJ IDEA ###
+copyright/target
+copyright/.idea
+copyright/.mvn
+copyright/sql
+copyright/*.iws
 
-*.log
 *.iml
-*.class
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/build/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+## Fabric
+fabric/workspaces

@@ -1,4 +1,13 @@
 # 基于Fabric的版权系统
+|env|version|
+|:----------|:----------|
+|ubuntu|18.04|
+|docker|18.03.0-ce|
+|mysql|8.0.13|
+|nodejs|v8.11.1|
+|golang|1.10.2|
+|java|10.0.2|
+|spring-boot|2.0.5-REALEASE|
 ## Fabric
 
 ### Data
