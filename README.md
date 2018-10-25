@@ -7,7 +7,7 @@
 |nodejs|v8.11.1|
 |golang|1.10.2|
 |java|10.0.2|
-|spring-boot|2.0.5-REALEASE|
+|spring-boot|2.0.6-REALEASE|
 ## Fabric
 
 ### Data

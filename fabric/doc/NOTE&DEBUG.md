@@ -31,3 +31,5 @@ tab 选ok
 sudo apt-get update
 sudo apt-get install mysql-server 
 ```
+3. 调通登录注册功能，注册还有些小问题
+4. 修改代码结构
