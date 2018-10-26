@@ -4,12 +4,14 @@ import com.wtlife.boot.domain.User;
 import com.wtlife.boot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @EnableAutoConfiguration
@@ -37,7 +39,7 @@ public class UserController {
     }
 
     @RequestMapping("/regist")
-    String regist(Model model) {
+    String regist(Model model, HttpServletRequest req) {
         model.addAttribute("user", new User());
         return "regist";
     }
@@ -53,10 +55,17 @@ public class UserController {
         boolean verify = userService.verifyUser(user);
         if (verify) {
             model.addAttribute("name", user.getName());
-            model.addAttribute("password", user.getPassword());
             return "result";
         } else {
             return "redirect:/notVerify";
         }
+    }
+
+    /**
+     * 文件上传
+     */
+    @RequestMapping(value = "/fileUpload")
+    String fileUpload() {
+        return "file";
     }
 }
