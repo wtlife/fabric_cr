@@ -13,12 +13,12 @@ type RightChaincode struct {
 }
 
 type Right struct {
-	Name      string `json:"Name"`
-	Author    string `json:"Author"`
-	Press     string `json:"Press"`
-	Timestamp int64  `json:"Ts"` //
-	Hash      string `json:"Hash"`
-	Signature string `json:"Sig"`
+	name      string `json:"name"`
+	author    string `json:"author"`
+	press     string `json:"press"`
+	timestamp int64  `json:"ts"`
+	hash      string `json:"hash"`
+	signature string `json:"sig"`
 }
 
 func main() {
@@ -70,7 +70,7 @@ func (rc *RightChaincode) Invoke(stub shim.ChaincodeStubInterface) peer.Response
 func (rc *RightChaincode) regist(stub shim.ChaincodeStubInterface, right *Right) peer.Response {
 	indexName := "name~author~press"
 
-	indexKey, err := stub.CreateCompositeKey(indexName, []string{right.Name, right.Author, right.Press})
+	indexKey, err := stub.CreateCompositeKey(indexName, []string{right.name, right.author, right.press})
 	if err != nil {
 		return shim.Error(err.Error())
 	}
