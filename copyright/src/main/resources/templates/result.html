@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>用户首页</title>
-    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
 </head>
 <body>
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
-            <label for="username" th:text="'欢迎用户,'+${name}" >Name</label>
+            <label for="username" th:text="'欢迎用户,'+${name}">Name</label>
         </div>
     </div>
     <ul class="nav nav-pills nav-stacked">
-        <li role="presentation"><a href="upload" class="href" >文件上传</a></li>
-        <li role="presentation"><a href="registRight" class="href" >版权登记</a></li>
-        <li role="presentation"><a href="queryRight" class="href" >版权查询</a></li>
-        <li role="presentation"><a href="queryTx" class="href" >交易信息查询</a></li>
+        <li role="presentation"><a href="upload" class="href">文件上传</a></li>
+        <li role="presentation"><a href="rightRegist" class="href">版权登记</a></li>
+        <li role="presentation"><a href="rightQuery" class="href">版权查询</a></li>
+        <li role="presentation"><a href="queryTx" class="href">交易信息查询</a></li>
     </ul>
 </div>
 </body>

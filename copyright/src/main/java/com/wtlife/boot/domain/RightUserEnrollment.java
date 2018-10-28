@@ -1,9 +1,10 @@
-package com.wtlife.fabric.user;
+package com.wtlife.boot.domain;
 
 import org.hyperledger.fabric.sdk.Enrollment;
 
 import javax.xml.bind.DatatypeConverter;
 import java.io.*;
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -19,9 +20,9 @@ public class RightUserEnrollment implements Enrollment {
 
     public RightUserEnrollment(String USERTYPE, String userName, String mspid) {
         if (mspid.equals("centerMSP")) {
-            CERTDIR = CERTDIR + "/fabric/workspaces/center/crypto-config";
+            CERTDIR = CERTDIR + "/right/workspaces/center/crypto-config";
         } else if (mspid.equals("press1MSP")) {
-            CERTDIR = CERTDIR + "/fabric/workspaces/press1/crypto-config";
+            CERTDIR = CERTDIR + "/right/workspaces/press1/crypto-config";
         }
 
 

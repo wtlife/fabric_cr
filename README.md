@@ -55,3 +55,7 @@ ChainCodeName="myrightcc"
 |queryRightByName|String name,String author,String press|Right right|
 
 ## Client(本地服务)
+
+- 提供了登录注册功能，并做了持久化
+- 提供，文件上传计算hash,使用sha1
+- 提供版权登记，版权查询的入口

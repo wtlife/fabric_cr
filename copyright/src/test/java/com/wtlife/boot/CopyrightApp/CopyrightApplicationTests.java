@@ -1,4 +1,4 @@
-package com.wtlife.boot;
+package com.wtlife.boot.CopyrightApp;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

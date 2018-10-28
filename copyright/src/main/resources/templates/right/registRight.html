@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>版权登记</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-3 column">
+            <form role="form" method="POST" th:action="@{/registRight}" th:object="${right}">
+
+                <label for="name">名称</label><input type="text" class="form-control" id="name"
+                                                   th:field="*{name}"/>
+
+                <label for="author">作者</label><input type="text" class="form-control" id="author"
+                                                     th:field="*{author}"/>
+                <label for="press">出版机构</label><input type="text" class="form-control" id="press"
+                                                      th:field="*{press}"/>
+                <label for="timestamp">时间戳</label><input type="text" class="form-control" id="timestamp"
+                                                         th:field="*{timestamp}"/>
+                <label for="hash">作品Hash</label><input type="text" class="form-control" id="hash"
+                                                       th:field="*{hash}"/>
+                <label for="signature">作品签名</label><input type="text" class="form-control" id="signature"
+                                                          th:field="*{signature}"/>
+                <button type="submit" class="btn btn-default">Rigest</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

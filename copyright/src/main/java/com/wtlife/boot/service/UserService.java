@@ -23,7 +23,6 @@ public class UserService {
         }
     }
 
-
     public boolean verifyUser(User user) {
         if (userDao.findByNameAndPassword(user.getName(), user.getPassword()).isEmpty()) {
             return false;

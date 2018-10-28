@@ -1,4 +1,4 @@
-package com.wtlife.fabric.user;
+package com.wtlife.boot.domain;
 
 import org.hyperledger.fabric.sdk.Enrollment;
 import org.hyperledger.fabric.sdk.User;

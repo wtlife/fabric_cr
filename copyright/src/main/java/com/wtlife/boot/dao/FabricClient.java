@@ -1,8 +1,8 @@
-package com.wtlife.fabric.client;
+package com.wtlife.boot.dao;
 
-import com.wtlife.fabric.bean.Right;
-import com.wtlife.fabric.org.Org;
-import com.wtlife.fabric.config.Config;
+import com.wtlife.boot.domain.Org;
+import com.wtlife.boot.domain.Right;
+import com.wtlife.boot.util.Config;
 import org.hyperledger.fabric.sdk.*;
 import org.hyperledger.fabric.sdk.exception.CryptoException;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
@@ -33,7 +33,7 @@ public class FabricClient {
     }
 
     public static HashMap<String, Org> orgHashMap = null;
-    public static ChaincodeID cid = ChaincodeID.newBuilder().setName(Config.CHAINCODENAME).setVersion(Config.CHAINCODEVERSION).build();
+    public static ChaincodeID cid = ChaincodeID.newBuilder().setName(Config.ChainCodeName).setVersion(Config.ChainCodeVersion).build();
     public static User peer0org1 = null;
 
     /**
@@ -54,7 +54,7 @@ public class FabricClient {
         client.setUserContext(peer0org1);
     }
 
-    public static void regist(Channel channel, Right right) throws InvalidArgumentException, ProposalException, UnsupportedEncodingException {
+    public static String regist(Channel channel, Right right) throws InvalidArgumentException, ProposalException, UnsupportedEncodingException {
         TransactionProposalRequest req = client.newTransactionProposalRequest();
         req.setChaincodeID(cid);
         req.setFcn("regist");
@@ -78,17 +78,17 @@ public class FabricClient {
                 if (x != null) {
                     payload = new String(x, "UTF-8");
                 }
-                System.out.format("Invoke transanction prosal response Txid: %s", payload);
+                return "Invoke transanction prosal response Txid: " + payload;
             } else {
                 throw new RuntimeException(resp.getMessage());
             }
-
         }
+        return "regist failed";
     }
 
-    public static void query(Channel channel, Right right) throws Exception {
+    public static String query(Channel channel, Right right) throws Exception {
         QueryByChaincodeRequest req = client.newQueryProposalRequest();
-        ChaincodeID cid = ChaincodeID.newBuilder().setName(Config.CHAINCODENAME).setVersion(Config.CHAINCODEVERSION).build();
+        ChaincodeID cid = ChaincodeID.newBuilder().setName(Config.ChainCodeName).setVersion(Config.ChainCodeVersion).build();
         req.setChaincodeID(cid);
         req.setFcn("queryRightByName");
         req.setArgs(new String[]{
@@ -106,6 +106,8 @@ public class FabricClient {
                 payload = new String(x, "UTF-8");
             }
             System.out.format("response:%s \n", payload);
+            return payload;
         }
+        return "查询出错";
     }
 }
