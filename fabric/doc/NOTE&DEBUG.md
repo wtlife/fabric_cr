@@ -37,3 +37,6 @@ sudo apt-get install mysql-server
 ## 1026
 1. 调通注册登录模块，增加用户主页
 2. 实现文件上传，返回文件hash功能
+
+## 1028
+1. 调通了fabric与本地web服务
