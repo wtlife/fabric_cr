@@ -13,12 +13,12 @@ type RightChaincode struct {
 }
 
 type Right struct {
-	name      string `json:"name"`
-	author    string `json:"author"`
-	press     string `json:"press"`
-	timestamp int64  `json:"ts"`
-	hash      string `json:"hash"`
-	signature string `json:"sig"`
+	Name      string `json:"name"`
+	Author    string `json:"author"`
+	Press     string `json:"press"`
+	Timestamp int64  `json:"timestamp"`
+	Hash      string `json:"hash"`
+	Signature string `json:"signature"`
 }
 
 func main() {
@@ -70,7 +70,7 @@ func (rc *RightChaincode) Invoke(stub shim.ChaincodeStubInterface) peer.Response
 func (rc *RightChaincode) regist(stub shim.ChaincodeStubInterface, right *Right) peer.Response {
 	indexName := "name~author~press"
 
-	indexKey, err := stub.CreateCompositeKey(indexName, []string{right.name, right.author, right.press})
+	indexKey, err := stub.CreateCompositeKey(indexName, []string{right.Name, right.Author, right.Press})
 	if err != nil {
 		return shim.Error(err.Error())
 	}
@@ -89,7 +89,7 @@ func (rc *RightChaincode) queryRightByName(stub shim.ChaincodeStubInterface, nam
 	indexName := "name~author~press"
 	indexKey, err := stub.CreateCompositeKey(indexName, []string{name, author, press})
 	if err != nil {
-		return "", err
+		return "Failde to createCompositKey", err
 	}
 	right, err := stub.GetState(indexKey)
 	if err != nil {

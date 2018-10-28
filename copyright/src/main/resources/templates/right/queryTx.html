@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>交易查询</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-3 column">
+            <form role="form" method="GET" th:action="@{/queryTxById}">
+
+                <label for="Id">交易Id</label><input type="text" class="form-control" id="Id"
+            />
+                <button type="submit" class="btn btn-default">Query!</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

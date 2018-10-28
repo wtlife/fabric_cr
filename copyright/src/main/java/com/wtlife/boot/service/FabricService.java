@@ -4,8 +4,8 @@ import com.wtlife.boot.dao.FabricClient;
 import com.wtlife.boot.domain.Org;
 import com.wtlife.boot.domain.Right;
 import com.wtlife.boot.util.Config;
-import org.apache.naming.factory.FactoryBase;
 import org.hyperledger.fabric.sdk.Channel;
+import org.hyperledger.fabric.sdk.TransactionInfo;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
 import org.hyperledger.fabric.sdk.exception.ProposalException;
 import org.hyperledger.fabric.sdk.exception.TransactionException;
@@ -48,5 +48,12 @@ public class FabricService {
         channel.initialize();
 
         return FabricClient.query(channel, right);
+    }
+
+//    根据交易id查询交易信息
+    public String queryTxinfoById(String id) throws InvalidArgumentException, ProposalException {
+        Channel channel = FabricClient.client.newChannel(Config.ChannelId);
+        TransactionInfo txinfo = channel.queryTransactionByID(id);
+        return "txinfo";
     }
 }

@@ -101,4 +101,17 @@ public class UserController {
     String queryRightByName(Right right) throws Exception {
         return fabricService.queryRightByName(right);
     }
+
+    /**
+     * 交易查询
+     */
+    @RequestMapping(value = "TxQuery")
+    String queryTx(){
+        return "right/queryTx";
+    }
+    @RequestMapping(value = "queryTxinfoById")
+    @ResponseBody
+    String queryTxinfoById(String id) throws ProposalException, InvalidArgumentException {
+        return fabricService.queryTxinfoById(id);
+    }
 }

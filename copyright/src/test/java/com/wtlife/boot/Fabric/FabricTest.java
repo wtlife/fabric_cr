@@ -2,6 +2,7 @@ package com.wtlife.boot.Fabric;
 
 import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.hyperledger.fabric.sdk.Channel;
+import org.hyperledger.fabric.sdk.TransactionInfo;
 import org.junit.Before;
 import org.junit.Test;
 import com.wtlife.boot.domain.Right;
@@ -46,5 +47,17 @@ public class FabricTest {
         channel.addOrderer(FabricClient.client.newOrderer("orderer.copyright.com", CONNFIG_Orderer));
         channel.initialize();
         FabricClient.query(channel, right);
+    }
+
+    @Test
+    public void TestQueryTxinfo() throws Exception {
+        System.out.println("测试查询Fabric交易信息");
+        Channel channel = FabricClient.client.newChannel(Config.ChannelId);
+        channel.addPeer(FabricClient.client.newPeer("peer0.center.copyright.com", CONNFIG_Peer0Org1));
+        channel.addOrderer(FabricClient.client.newOrderer("orderer.copyright.com", CONNFIG_Orderer));
+        channel.initialize();
+        TransactionInfo txInfo = channel.queryTransactionByID("ba91de0a431def8bba1d109094c21792456cf6e53154434f03020277185f4e77");
+        System.out.println("QueryTransactionByID returned TransactionInfo: txID " + txInfo.getTransactionID()
+                + "\n     validation code " + txInfo.getValidationCode().getNumber());
     }
 }

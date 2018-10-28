@@ -20,9 +20,9 @@ public class RightUserEnrollment implements Enrollment {
 
     public RightUserEnrollment(String USERTYPE, String userName, String mspid) {
         if (mspid.equals("centerMSP")) {
-            CERTDIR = CERTDIR + "/right/workspaces/center/crypto-config";
+            CERTDIR = CERTDIR + "/fabric/workspaces/center/crypto-config";
         } else if (mspid.equals("press1MSP")) {
-            CERTDIR = CERTDIR + "/right/workspaces/press1/crypto-config";
+            CERTDIR = CERTDIR + "/fabric/workspaces/press1/crypto-config";
         }
 
 
