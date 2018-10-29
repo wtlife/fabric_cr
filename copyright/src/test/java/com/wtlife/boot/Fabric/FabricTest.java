@@ -13,7 +13,7 @@ import com.wtlife.boot.util.Config;
 public class FabricTest {
     private static String CONNFIG_Orderer = "grpc://127.0.0.1:7050";
     private static String CONNFIG_Peer0Org1 = "grpc://127.0.0.1:11051";
-    private static Right right = new Right("work1", "wutao", "center", 0, "0xhash", "sigsigsig");
+    private static Right right = new Right("workk3", "wutao", "center", 0, "0xhash", "signature");
 
     @Before
     public void Setup() throws Exception {
@@ -56,8 +56,8 @@ public class FabricTest {
         channel.addPeer(FabricClient.client.newPeer("peer0.center.copyright.com", CONNFIG_Peer0Org1));
         channel.addOrderer(FabricClient.client.newOrderer("orderer.copyright.com", CONNFIG_Orderer));
         channel.initialize();
-        TransactionInfo txInfo = channel.queryTransactionByID("ba91de0a431def8bba1d109094c21792456cf6e53154434f03020277185f4e77");
-        System.out.println("QueryTransactionByID returned TransactionInfo: txID " + txInfo.getTransactionID()
-                + "\n     validation code " + txInfo.getValidationCode().getNumber());
+        TransactionInfo txInfo = channel.queryTransactionByID("55352912cc4c6b1c58317c8eb9376c45b9fcdb2c81057aac828e88abbb4215be");
+        System.out.println("QueryTransactionByID returned TransactionInfo:\ntxID:" + txInfo.getTransactionID()
+                + "\nvalidation code " + txInfo.getValidationCode().getNumber());
     }
 }

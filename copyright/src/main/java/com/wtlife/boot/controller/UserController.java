@@ -30,6 +30,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @GetMapping(value = "/")
+    String index(){
+        return "redirect:/login";
+    }
+
     @RequestMapping("/notVerify")
     @ResponseBody
     String notVerify() {

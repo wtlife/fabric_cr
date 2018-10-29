@@ -71,19 +71,14 @@ public class FabricClient {
         Collection<ProposalResponse> resps = channel.sendTransactionProposal(req);
         for (ProposalResponse resp : resps) {
             if (resp.getStatus() == ProposalResponse.Status.SUCCESS) {
-                System.out.format("Registing the work:%s \n", req.getArgs());
-                System.out.format("Successful transaction proposal response Txid: %s from peer %s\n", resp.getTransactionID(), resp.getPeer());
-                byte[] x = resp.getChaincodeActionResponsePayload();
-                String payload = null;
-                if (x != null) {
-                    payload = new String(x, "UTF-8");
-                }
-                return "Invoke transanction prosal response Txid: " + payload;
+                channel.sendTransaction(resps);
+                System.out.format("Successful transaction proposal response Txid:\n%s\nfrom peer:\n%s", resp.getTransactionID(), resp.getPeer().getName());
+                return "Successful transaction proposal response Txid:\n " + resp.getTransactionID() + "\n from \n" + resp.getPeer().getName();
             } else {
-                throw new RuntimeException(resp.getMessage());
+                throw new RuntimeException("Failed transaction proposal!");
             }
         }
-        return "regist failed";
+        return "Failed transaction proposal!";
     }
 
     public static String query(Channel channel, Right right) throws Exception {
@@ -94,8 +89,14 @@ public class FabricClient {
         req.setArgs(new String[]{
                 right.getName(),
                 right.getAuthor(),
-                right.getPress()
-        });
+                right.getPress()}
+        );
+
+        Map<String, byte[]> tm = new HashMap<>();
+        tm.put("HyperLedgerFabric", "QueryByChaincodeRequest:JavaSDK".getBytes(UTF_8));
+        tm.put("method", "QueryByChaincodeRequest".getBytes(UTF_8));
+        req.setTransientMap(tm);
+
         System.out.println("Querying for " + right.getName());
         Collection<ProposalResponse> resps = channel.queryByChaincode(req);
         for (ProposalResponse resp : resps) {

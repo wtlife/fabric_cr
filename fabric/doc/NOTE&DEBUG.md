@@ -40,3 +40,14 @@ sudo apt-get install mysql-server
 
 ## 1028
 1. 调通了fabric与本地web服务
+2. 发现sdk 注册的一个bug
+
+## 1029
+```
+peer chaincode invoke -C mychannel -n myrightcc -c '{"Args":["regist","workk","wutao","center","0","0xhash","sigsigsig"]}'
+df6c52802b8474cdc9ecf074ab8a26a5cd7288b6874be578ee87aeaef2487f73
+peer chaincode query -C mychannel -n myrightcc -c '{"Args":["queryRightByName","work1","wutao","center"]}'
+
+原来少写一行代码 哭~
+channel.sendTransaction(resps);
+```

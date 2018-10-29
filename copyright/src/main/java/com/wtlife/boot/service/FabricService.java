@@ -38,22 +38,19 @@ public class FabricService {
      */
     //根据名字查询
     public String queryRightByName(Right right) throws Exception {
-        Channel channel = FabricClient.client.newChannel(Config.ChannelId);
+        Channel channel = FabricClient.client.getChannel(Config.ChannelId);
         Org org = Config.getConfigure().get("org1");
         String peerName = "peer0.center.copyright.com";
         String ordererName = "orderer.copyright.com";
 
-        channel.addPeer(FabricClient.client.newPeer(peerName, org.getPeerLocation(peerName)));
-        channel.addOrderer(FabricClient.client.newOrderer(ordererName, org.getOrdererLocation(ordererName)));
-        channel.initialize();
-
         return FabricClient.query(channel, right);
     }
 
-//    根据交易id查询交易信息
+    //    根据交易id查询交易信息
     public String queryTxinfoById(String id) throws InvalidArgumentException, ProposalException {
-        Channel channel = FabricClient.client.newChannel(Config.ChannelId);
-        TransactionInfo txinfo = channel.queryTransactionByID(id);
-        return "txinfo";
+        Channel channel = FabricClient.client.getChannel(Config.ChannelId);
+        TransactionInfo txInfo = channel.queryTransactionByID(id);
+        return "QueryTransactionByID returned TransactionInfo:\ntxID:" + txInfo.getTransactionID()
+                + "\nvalidation code " + txInfo.getValidationCode().getNumber();
     }
 }
