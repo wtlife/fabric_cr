@@ -74,15 +74,6 @@ def generate_cli_config(org_domain, org_msp, org_name):
         '../../docker_scripts/:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/')
     volumes.append('../../chaincode/:/opt/gopath/src/github.com/chaincode/')
 
-    if not CTNR_IS_LOCAL:
-        hosts = list()
-        hosts.append('orderer.dota.com:172.24.4.163')
-        hosts.append('peer0.dota.com:172.24.4.163')
-        hosts.append('couchdb0.dota.com:172.24.4.163')
-        hosts.append('peer0.google.com:172.24.12.74')
-        hosts.append('couchdb0.google.com:172.24.12.74')
-
-        ser_cli['extra_hosts'] = hosts
     return cfg
 
 
@@ -96,15 +87,8 @@ def generate_orderer_config(orderer_domain, orderer_msp, orderer_name, outer_por
 
     cfg['networks'] = dict()
 
-    if CTNR_IS_LOCAL:
-        cfg['networks']['byfn'] = None
-    else:
-        cfg['networks']['byfn'] = dict()
-        cfg['networks']['byfn']['ipam'] = dict()
-        cfg['networks']['byfn']['ipam']['driver'] = 'default'
-        cfg['networks']['byfn']['ipam']['config'] = [
-            {'subnet': '172.18.0.0/24'}]
-        cfg['networks']['byfn']['driver'] = 'bridge'
+    # if CTNR_IS_LOCAL:
+    cfg['networks']['byfn'] = None
 
     ser_orderer = dict()
     ser_orderer['container_name'] = '{0}.{1}'.format(
@@ -148,16 +132,6 @@ def generate_orderer_config(orderer_domain, orderer_msp, orderer_name, outer_por
         orderer_name=orderer_name, orderer_domain=orderer_domain))
     volumes.append('{orderer_name}.{orderer_domain}:/var/hyperledger/production/orderer'.format(
         orderer_name=orderer_name, orderer_domain=orderer_domain))
-
-    if not CTNR_IS_LOCAL:
-        hosts = list()
-        hosts.append('orderer.dota.com:172.24.4.163')
-        hosts.append('peer0.dota.com:172.24.4.163')
-        hosts.append('couchdb0.dota.com:172.24.4.163')
-        hosts.append('peer0.google.com:172.24.12.74')
-        hosts.append('couchdb0.google.com:172.24.12.74')
-
-        ser_orderer['extra_hosts'] = hosts
 
     return cfg
 
@@ -206,13 +180,6 @@ def generate_peer_config(org_domain, org_msp, org_peer_index, org_peer_outer_705
     hosts = list()
     ser_db['extra_hosts'] = hosts
 
-    if CTNR_IS_LOCAL:
-        hosts.append('orderer.dota.com:172.24.4.163')
-        hosts.append('peer0.dota.com:172.24.4.163')
-        hosts.append('couchdb0.dota.com:172.24.4.163')
-        hosts.append('peer0.google.com:172.24.12.74')
-        hosts.append('couchdb0.google.com:172.24.12.74')
-
     # PEER
     ser_peer = dict()
     peer_ctnr_name = 'peer{0}.{1}'.format(
@@ -229,15 +196,7 @@ def generate_peer_config(org_domain, org_msp, org_peer_index, org_peer_outer_705
     ser_peer['ports'].append('{0}:7051'.format(org_peer_outer_7051))
     ser_peer['ports'].append('{0}:7053'.format(org_peer_outer_7053))
 
-    if CTNR_IS_LOCAL:
-        if org_domain == 'dota.com':
-            ser_peer['networks'] = {'byfn': {'ipv4_address': '172.18.0.10'}}
-        elif org_domain == 'google.com':
-            ser_peer['networks'] = {'byfn': {'ipv4_address': '172.18.0.20'}}
-        else:
-            ser_peer['networks'] = ['byfn']
-    else:
-        ser_peer['networks'] = ['byfn']
+    ser_peer['networks'] = ['byfn']
 
     env = list()
     ser_peer['environment'] = env
@@ -277,23 +236,6 @@ def generate_peer_config(org_domain, org_msp, org_peer_index, org_peer_outer_705
         org_peer_index=org_peer_index, org_domain=org_domain))
     volumes.append('peer{org_peer_index}.{org_domain}:/var/hyperledger/production'.format(
         org_peer_index=org_peer_index, org_domain=org_domain))
-
-    extra_hosts = list()
-    ser_peer['extra_hosts'] = extra_hosts
-
-    if CTNR_IS_LOCAL:
-        extra_hosts.append('orderer.dota.com:172.24.4.163')
-        extra_hosts.append('couchdb0.dota.com:172.24.4.163')
-        extra_hosts.append('couchdb0.google.com:172.24.12.74')
-
-        if org_domain == 'dota.com':
-            extra_hosts.append('peer0.dota.com:172.18.0.10')
-            extra_hosts.append('peer0.google.com:172.24.12.74')
-        elif org_domain == 'google.com':
-            extra_hosts.append('peer0.dota.com:172.24.4.163')
-            extra_hosts.append('peer0.google.com:172.18.0.20')
-        else:
-            pass
 
     return cfg
 

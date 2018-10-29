@@ -56,7 +56,7 @@ public class FabricTest {
         channel.addPeer(FabricClient.client.newPeer("peer0.center.copyright.com", CONNFIG_Peer0Org1));
         channel.addOrderer(FabricClient.client.newOrderer("orderer.copyright.com", CONNFIG_Orderer));
         channel.initialize();
-        TransactionInfo txInfo = channel.queryTransactionByID("55352912cc4c6b1c58317c8eb9376c45b9fcdb2c81057aac828e88abbb4215be");
+        TransactionInfo txInfo = channel.queryTransactionByID("47be5939a7e4824847a83b41725dfa6809667442df6ed2cefaa508e3fb8d4a8d");
         System.out.println("QueryTransactionByID returned TransactionInfo:\ntxID:" + txInfo.getTransactionID()
                 + "\nvalidation code " + txInfo.getValidationCode().getNumber());
     }

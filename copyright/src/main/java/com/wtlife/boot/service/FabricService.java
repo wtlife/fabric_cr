@@ -47,10 +47,20 @@ public class FabricService {
     }
 
     //    根据交易id查询交易信息
-    public String queryTxinfoById(String id) throws InvalidArgumentException, ProposalException {
+    public String queryTxInfoById(String id) {
         Channel channel = FabricClient.client.getChannel(Config.ChannelId);
-        TransactionInfo txInfo = channel.queryTransactionByID(id);
-        return "QueryTransactionByID returned TransactionInfo:\ntxID:" + txInfo.getTransactionID()
-                + "\nvalidation code " + txInfo.getValidationCode().getNumber();
+        TransactionInfo txInfo = null;
+        try {
+            txInfo = channel.queryTransactionByID(id);
+        } catch (ProposalException e) {
+            e.printStackTrace();
+            return "Proposal出错" + e.getMessage();
+        } catch (InvalidArgumentException e) {
+            return "请输入正确的id" + e.getMessage();
+        }
+        System.out.println("TransactionInfo:\n 交易Id:" + txInfo.getTransactionID()
+                + "\n ValidationCode: \n" + txInfo.getValidationCode().getNumber());
+        return "TransactionInfo:</br> 交易Id:" + txInfo.getTransactionID()
+                + "</br> ValidationCode: </br>" + txInfo.getValidationCode().getNumber();
     }
 }

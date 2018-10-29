@@ -3,11 +3,11 @@ package com.wtlife.boot.domain;
 public class Right {
 
     public String name;
-    public String author;
-    public String press;
-    public int timestamp;
-    public String hash;
-    public String signature;
+    private String author;
+    private String press;
+    private int timestamp;
+    private String hash;
+    private String signature;
 
     public Right(String name, String author, String press, int timeStamp, String hash, String signature) {
         this.name = name;

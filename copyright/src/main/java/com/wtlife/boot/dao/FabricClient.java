@@ -73,7 +73,11 @@ public class FabricClient {
             if (resp.getStatus() == ProposalResponse.Status.SUCCESS) {
                 channel.sendTransaction(resps);
                 System.out.format("Successful transaction proposal response Txid:\n%s\nfrom peer:\n%s", resp.getTransactionID(), resp.getPeer().getName());
-                return "Successful transaction proposal response Txid:\n " + resp.getTransactionID() + "\n from \n" + resp.getPeer().getName();
+                return "Successful transaction proposal response</br> " +
+                        "Txid:</br> "
+                        + resp.getTransactionID() + "</br> " +
+                        "from </br>"
+                        + resp.getPeer().getName();
             } else {
                 throw new RuntimeException("Failed transaction proposal!");
             }

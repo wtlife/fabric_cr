@@ -9,9 +9,8 @@
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-3 column">
-            <form role="form" method="GET" th:action="@{/queryTxinfoById}">
-
-                <label for="Id">交易Id</label><input type="text" class="form-control" id="Id"
+            <form role="form" method="POST" th:action="@{/queryTxInfoById}">
+                <label for="Id">交易Id</label><input type="text" class="form-control" id="Id" name="Id"
             />
                 <button type="submit" class="btn btn-default">Query!</button>
             </form>
