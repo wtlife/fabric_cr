@@ -51,3 +51,11 @@ peer chaincode query -C mychannel -n myrightcc -c '{"Args":["queryRightByName","
 原来少写一行代码 哭~
 channel.sendTransaction(resps);
 ```
+用户名wutao注册成功！
+你的publicKey:MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEoZ5Jq6jtfMPNmOqTBETkH+a3JZ5n7AmkCHaEVYVUIv8F/CJKpehAX+KR98GxJgfWGAWjjFpPJlpTCFlF3tTF+w==
+你的privateKey:MEECAQAwEwYHKoZIzj0CAQYIKoZIzj0DAQcEJzAlAgEBBCB/IoW6UFy0uBWYotuhHDU8cMfdaBU6RhSAiWM/T5wGXQ==
+请妥善保管!无备份!
+上传成功
+绝对路径:/home/wutao/temp/doc.md
+文件Hash： c87ad606d0589a8958ec5b2d8d8eefb7252cd473
+文件签名:MEQCIBxqzzQzAUcCDjsSEW5X+zNuHt9vPxUbTeuP8lEbiARSAiAoO1HwvTShvCYCxbp5u2HwGWgq9Jguqvi71y0dw08Xpw==

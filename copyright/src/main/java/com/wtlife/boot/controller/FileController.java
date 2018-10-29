@@ -1,6 +1,6 @@
 package com.wtlife.boot.controller;
 
-import com.wtlife.boot.domain.File;
+import com.wtlife.boot.domain.Document;
 import com.wtlife.boot.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -26,14 +26,14 @@ public class FileController {
      */
     @GetMapping("/upload")
     public String upload(Model model) {
-        model.addAttribute("file", new File());
+        model.addAttribute("document", new Document());
         return "/file/upload";
     }
 
     @PostMapping("/upload")
     @ResponseBody
-    public String upload(@RequestParam("file") MultipartFile file) throws NoSuchAlgorithmException {
-        String message = fileService.upload(file);
+    public String upload(@RequestParam("file") MultipartFile file,String privateKey) {
+        String message = fileService.upload(file,privateKey);
         return message;
     }
 }

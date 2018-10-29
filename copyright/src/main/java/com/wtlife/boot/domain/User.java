@@ -18,6 +18,29 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+
+    @Column(nullable = false)
+    private int IDnumber;
+
+    @Column(nullable = false)
+    private String publicKey;
+
+    public int getIDnumber() {
+        return IDnumber;
+    }
+
+    public void setIDnumber(int IDnumber) {
+        this.IDnumber = IDnumber;
+    }
+
+    public String getPublicKey() {
+        return publicKey;
+    }
+
+    public void setPublicKey(String publicKey) {
+        this.publicKey = publicKey;
+    }
+
     public User() {
     }
 
