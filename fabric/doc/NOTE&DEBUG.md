@@ -66,3 +66,7 @@ hash：40
 private:92  
 public:124
 signature:96
+
+1. 增加了json解析
+2. 增加了时间戳<=>时间转换
+3. 增加了文件验证
