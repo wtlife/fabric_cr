@@ -45,7 +45,7 @@ public class UserController {
 
     @RequestMapping(value = "/registUser", method = RequestMethod.POST)
     @ResponseBody
-    String registUser(User user, Model model) {
+    String registUser(User user) {
         return userService.registUser(user);
     }
 

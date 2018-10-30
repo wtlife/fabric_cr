@@ -77,4 +77,9 @@ public class Right {
                 this.getHash(),
                 this.getSignature()};
     }
+
+    @Override
+    public String toString() {
+        return "Right [name=" + name + ", author=" + author + ",press=" + press + ",timestamp=" + timestamp + ",hash=" + hash + ",signature=" + signature + "]";
+    }
 }

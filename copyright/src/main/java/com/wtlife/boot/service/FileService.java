@@ -5,6 +5,7 @@ import com.wtlife.boot.util.DSA;
 import com.wtlife.boot.util.GetHash;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.File;
 
 @Service
@@ -29,11 +30,25 @@ public class FileService {
         } catch (Exception e) {
             return "上传失败：</br>" + e.getMessage();
         }
-        Document doc = new Document(fileName,filePath,fileHash,signature);
+        Document doc = new Document(fileName, filePath, fileHash, signature);
         return "上传成功</br>" +
                 "绝对路径:" + dest + "</br>" +
                 "文件Hash： " + fileHash + "</br>" +
                 "文件签名:" + signature;
+    }
+
+    public String fileVerify(String hash, String signature, String publicKey) {
+        Boolean bool = false;
+        try {
+            bool = DSA.verify(hash, signature, publicKey);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        if (bool) {
+            return "验证成功";
+        } else {
+            return "验证失败";
+        }
     }
 }
 

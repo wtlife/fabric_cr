@@ -32,8 +32,31 @@ public class FileController {
 
     @PostMapping("/upload")
     @ResponseBody
-    public String upload(@RequestParam("file") MultipartFile file,String privateKey) {
-        String message = fileService.upload(file,privateKey);
+    public String upload(@RequestParam("file") MultipartFile file, String privateKey) {
+        String message = fileService.upload(file, privateKey);
         return message;
     }
+
+    /**
+     * 文件验证
+     */
+    @GetMapping("/fileVerify")
+    public String fileVerify() {
+        return "/file/fileVerify";
+    }
+
+    @PostMapping("/fileVerify")
+    @ResponseBody
+    public String fileVerify(String hash, String signature, String publicKey) {
+        if (hash.length() != 40) {
+            return "hash格式有误";
+        } else if (signature.length() != 96) {
+            return "签名格式有误";
+        } else if (publicKey.length() != 124) {
+            return "公钥格式有误";
+        }
+        String message = fileService.fileVerify(hash, signature, publicKey);
+        return message;
+    }
+
 }

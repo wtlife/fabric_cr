@@ -1,5 +1,6 @@
 package com.wtlife.boot.Fabric;
 
+import com.alibaba.fastjson.JSON;
 import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.hyperledger.fabric.sdk.Channel;
 import org.hyperledger.fabric.sdk.TransactionInfo;
@@ -13,7 +14,7 @@ import com.wtlife.boot.util.Config;
 public class FabricTest {
     private static String CONNFIG_Orderer = "grpc://127.0.0.1:7050";
     private static String CONNFIG_Peer0Org1 = "grpc://127.0.0.1:11051";
-    private static Right right = new Right("workk3", "wutao", "center", 0, "0xhash", "signature");
+    private static Right right = new Right("work1", "wutao", "center", 0, "0xhash", "signature");
 
     @Before
     public void Setup() throws Exception {

@@ -58,4 +58,11 @@ channel.sendTransaction(resps);
 上传成功
 绝对路径:/home/wutao/temp/doc.md
 文件Hash： c87ad606d0589a8958ec5b2d8d8eefb7252cd473
-文件签名:MEQCIBxqzzQzAUcCDjsSEW5X+zNuHt9vPxUbTeuP8lEbiARSAiAoO1HwvTShvCYCxbp5u2HwGWgq9Jguqvi71y0dw08Xpw==
+文件签名:MEUCIQC/RjYjxCfOJMBdMz/kJliQCSPK0dPWBbdKpj1h/yf3twIgfFFwnS9BRWfSqnnxY9D5oKKQHETuUGpqDE9C3CoyuYQ=
+
+## 1030
+字符串位数：  
+hash：40  
+private:92  
+public:124
+signature:96

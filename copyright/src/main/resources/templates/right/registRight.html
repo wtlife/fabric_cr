@@ -17,9 +17,9 @@
                 <label for="author">作者</label><input type="text" class="form-control" id="author"
                                                      th:field="*{author}"/>
                 <label for="press">出版机构</label><input type="text" class="form-control" id="press"
-                                                      th:field="*{press}"/>
+                                                      th:field="*{press}" th:placeholder="center"/>
                 <label for="timestamp">时间戳</label><input type="text" class="form-control" id="timestamp"
-                                                         th:field="*{timestamp}"/>
+                                                         th:field="*{timestamp}" th:placeholder="0"/>
                 <label for="hash">作品Hash</label><input type="text" class="form-control" id="hash"
                                                        th:field="*{hash}"/>
                 <label for="signature">作品签名</label><input type="text" class="form-control" id="signature"

@@ -1,9 +1,11 @@
 package com.wtlife.boot.service;
 
+import com.alibaba.fastjson.JSON;
 import com.wtlife.boot.dao.FabricClient;
 import com.wtlife.boot.domain.Org;
 import com.wtlife.boot.domain.Right;
 import com.wtlife.boot.util.Config;
+import com.wtlife.boot.util.DateStamp;
 import org.hyperledger.fabric.sdk.Channel;
 import org.hyperledger.fabric.sdk.TransactionInfo;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
@@ -43,7 +45,15 @@ public class FabricService {
         String peerName = "peer0.center.copyright.com";
         String ordererName = "orderer.copyright.com";
 
-        return FabricClient.query(channel, right);
+        String json = FabricClient.query(channel, right);
+        Right res = JSON.parseObject(json, Right.class);
+        String time = DateStamp.getDate(String.valueOf(res.getTimestamp()));
+        return "名   称:" + res.getName() + "</br>" +
+                "作   者:" + res.getAuthor() + "</br>" +
+                "登记机构:" + res.getPress() + "</br>" +
+                "登记时间:" + time + "</br>" +
+                "作品哈希:" + res.getHash() + "</br>" +
+                "作品签名:" + res.getSignature() + "</br>";
     }
 
     //    根据交易id查询交易信息
