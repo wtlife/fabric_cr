@@ -70,3 +70,18 @@ signature:96
 1. 增加了json解析
 2. 增加了时间戳<=>时间转换
 3. 增加了文件验证
+
+
+用户名wutao001注册成功！
+你的publicKey:MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE/MW+N5Nj6xCx7hamX+bEyBPw/XU0HV7loZfFol0WY6/Mg3vQNsqN3GdbOuJyoxbppSTbeUa5DJ7ueVthKtF1fw==
+你的privateKey:MEECAQAwEwYHKoZIzj0CAQYIKoZIzj0DAQcEJzAlAgEBBCA2MyVavzS0oounfRRxRXii3ze5Wco7d+qfTTNiCYaAag==
+请妥善保管!无备份!
+绝对路径:/home/wutao/temp/doc.md
+文件Hash： c87ad606d0589a8958ec5b2d8d8eefb7252cd473
+文件签名:MEYCIQCQf5UwuHO+tvmPtP2Ab8c/MpAEaDMvNLmB1clVR5HuogIhAKvdHWUn6OENc0VX2dRUJfx8WvtvrduJwWQFdmqf9RXD
+
+Successful transaction proposal response
+Txid:
+96215e4adc1c5e939dc91d93c81cb6104b97aabec2edc7945b4916c855ff5843
+from 
+peer0.center.copyright.com
