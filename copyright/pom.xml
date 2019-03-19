@@ -73,6 +73,18 @@
             <artifactId>spring-restdocs-mockmvc</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>it.unisa.dia.gas.jpbc</groupId>
+            <artifactId>jpbc-api</artifactId>
+            <version>1.2.1</version>
+            <systemPath>${project.basedir}/lib/jpbc-api-1.2.1.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>it.unisa.dia.gas.jpbc</groupId>
+            <artifactId>jpbc-plaf</artifactId>
+            <version>1.2.1</version>
+            <systemPath>${project.basedir}/lib/jpbc-plaf-1.2.1.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>

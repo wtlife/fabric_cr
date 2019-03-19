@@ -24,7 +24,12 @@
                                                        th:field="*{hash}"/>
                 <label for="signature">作品签名</label><input type="text" class="form-control" id="signature"
                                                           th:field="*{signature}"/>
-                <button type="submit" class="btn btn-default">Rigest</button>
+                <label for="id">身份信息</label><input type="text" class="form-control" id="id"
+                                                          th:field="*{id}"/>
+
+                <label for="policy">访问策略</label><input type="text" class="form-control" id="policy" name="policy"
+            />
+                <button type="submit" class="btn btn-default">Regist</button>
 
             </form>
         </div>

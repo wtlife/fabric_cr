@@ -15,9 +15,11 @@ export FABRIC_LOCAL_CTNR='YES'
 workspaces_path="$root_path/workspaces"
 ORG1_PATH="$workspaces_path/center"
 ORG2_PATH="$workspaces_path/press1"
+ORG3_PATH="$workspaces_path/press2"
 
 mkdir -p $ORG1_PATH
 mkdir -p $ORG2_PATH
+mkdir -p $ORG3_PATH
 
 echo $workspaces_path
 echo $ORG1_PATH
@@ -51,6 +53,15 @@ ORG2_PEER_OUTER_PORT=14052
 ORG2_PEER_OUTER_PORT2=14054
 COUCHDB2_PORT=5985
 
+#ORG3
+ORG3_NAME=press2
+ORG3_DOMAIN=$ORG3_NAME.$ORDERER_DOMAIN
+ORG3_MSP=${ORG3_NAME}MSP
+ORG3_PEER_COUNT=2
+ORG3_PEER_OUTER_PORT=17052
+ORG3_PEER_OUTER_PORT2=17054
+COUCHDB3_PORT=5986
+
 #CHANNEL
 CHANNEL_NAME=mychannel
 
@@ -64,10 +75,8 @@ CHAINCODE_VERSION_2_POLICY="OR ('"${ORG1_MSP}".peer','"${ORG2_MSP}".peer')"
 CHAINCODE_PATH="rightcc"
 CHAINCODE_NAME="myrightcc"
 CHAINCODE_EMPTY_ARGS='[]'
-CHAINCODE_QUERY_ARGS='["queryRightByName","work1","wutao","center"]'
-CHAINCODE_INVOKE_ARGS_1='["regist","work1","wutao","center","0","0xhash","sigsigsig"]' 
-CHAINCODE_INVOKE_ARGS_2='["regist","work2","wutao","center","0","0xhash","sigsigsig"]' 
-CHAINCODE_INVOKE_ARGS_3='["regist","work3","wutao","center","0","0xhash","sigsigsig"]' 
+CHAINCODE_QUERY_ARGS='["queryRightByName","work1","tom","center"]'
+CHAINCODE_INVOKE_ARGS_1='["regist","work1","tom","center","0","0xhash","signature"]' 
 
 uplogd "clean"
 if [ "$workspaces_path" == "" ] || [ "$workspaces_path" == "/" ]; then
@@ -110,12 +119,22 @@ _wait_seconds
 chaincode_query $CHANNEL_NAME $CHAINCODE_NAME $CHAINCODE_QUERY_ARGS $ORG1_NAME
 _wait_seconds
 
+
 echo
 echo ">>>>>>>>>>>>>>>>>>>>>>  Org 2 step 1  <<<<<<<<<<<<<<<<<<<<<<<"
 generate_affi_artifacts $ORG2_DOMAIN $ORG2_MSP $ORG2_NAME $ORG2_PEER_COUNT $ORG2_PEER_OUTER_PORT $ORG2_PEER_OUTER_PORT2 $COUCHDB2_PORT $ORG2_PATH
 container_start_cli $ORG2_PATH 
 container_start_peers $ORG2_PATH 0 $[$ORG2_PEER_COUNT-1]
 _wait_seconds
+
+
+echo 
+#echo "========================Org 3 step 1========================"
+#generate_affi_artifacts $ORG3_DOMAIN $ORG3_MSP $ORG3_NAME $ORG3_PEER_COUNT $ORG3_PEER_OUTER_PORT $ORG3_PEER_OUTER_PORT2 $COUCHDB3_PORT $ORG3_PATH
+#container_start_cli $ORG3_PATH 
+#container_start_peers $ORG3_PATH 0 $[$ORG3_PEER_COUNT-1]
+#_wait_seconds	
+
 
 echo
 echo ">>>>>>>>>>>>>>>>>>>>>>  Copy org2.json & orderer_material  <<<<<<<<<<<<<<<<<<<<<<<"
@@ -139,6 +158,7 @@ _wait_seconds
 
 chaincode_query $CHANNEL_NAME $CHAINCODE_NAME $CHAINCODE_QUERY_ARGS $ORG1_NAME
 _wait_seconds
+
 
 echo
 echo ">>>>>>>>>>>>>>>>>>>>>>  Org 2 step 2  <<<<<<<<<<<<<<<<<<<<<<<"
@@ -175,4 +195,4 @@ _wait_seconds
 # _wait_seconds
 
 echo ">>>>>>>>>>>>>>>>>>>>>>  Done  <<<<<<<<<<<<<<<<<<<<<<<"
-exit 0
+#exit 0

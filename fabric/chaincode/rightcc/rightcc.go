@@ -19,6 +19,7 @@ type Right struct {
 	Timestamp int64  `json:"timestamp"`
 	Hash      string `json:"hash"`
 	Signature string `json:"signature"`
+	ID        string `json:"id"`
 }
 
 func main() {
@@ -37,8 +38,8 @@ func (rc *RightChaincode) Invoke(stub shim.ChaincodeStubInterface) peer.Response
 	fmt.Println("ChainCode is running" + fn)
 	switch fn {
 	case "regist":
-		if len(args) != 6 {
-			return shim.Error("There must be 6 parameters")
+		if len(args) != 7 {
+			return shim.Error("There must be 7 parameters")
 		}
 		_, err := strconv.ParseInt(args[3], 10, 64)
 		if err != nil {
@@ -48,7 +49,7 @@ func (rc *RightChaincode) Invoke(stub shim.ChaincodeStubInterface) peer.Response
 		if err != nil {
 			return shim.Error("Get TimeStamp Error" + err.Error())
 		}
-		right := &Right{args[0], args[1], args[2], ts.Seconds, args[4], args[5]}
+		right := &Right{args[0], args[1], args[2], ts.Seconds, args[4], args[5], args[6]}
 		return rc.regist(stub, right)
 	case "queryRightByName":
 		if len(args) != 3 {

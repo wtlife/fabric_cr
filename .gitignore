@@ -4,6 +4,8 @@ copyright/.idea
 copyright/.mvn
 copyright/sql
 copyright/*.iws
+copyright/src/main/resources/temp
+copyright/src/main/abe_temp
 
 *.iml
 *.ipr

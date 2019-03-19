@@ -2,9 +2,6 @@ package com.wtlife.boot.controller;
 
 import com.wtlife.boot.domain.Right;
 import com.wtlife.boot.service.FabricService;
-import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
-import org.hyperledger.fabric.sdk.exception.ProposalException;
-import org.hyperledger.fabric.sdk.exception.TransactionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
@@ -13,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
 
 @Controller
 @EnableAutoConfiguration
@@ -34,8 +29,8 @@ public class FabricController {
 
     @RequestMapping(value = "/registRight")
     @ResponseBody
-    String registUser(Right right) throws InvalidArgumentException, TransactionException, ProposalException, MalformedURLException, UnsupportedEncodingException {
-        return fabricService.registRight(right);
+    String registUser(Right right,String policy) throws Exception {
+        return fabricService.registRight(right,policy);
     }
 
     /**
@@ -49,8 +44,8 @@ public class FabricController {
 
     @RequestMapping(value = "/queryRightByName")
     @ResponseBody
-    String queryRightByName(Right right) throws Exception {
-        String message = fabricService.queryRightByName(right);
+    String queryRightByName(Right right,String username) throws Exception {
+        String message = fabricService.queryRightByName(right,username);
         return message;
     }
 

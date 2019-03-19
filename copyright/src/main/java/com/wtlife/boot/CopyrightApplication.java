@@ -1,19 +1,28 @@
 package com.wtlife.boot;
 
 import com.wtlife.boot.dao.FabricClient;
-import org.hyperledger.fabric.sdk.exception.CryptoException;
-import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
+import com.wtlife.boot.util.Config;
+import nupt.wtlife.wcpabe.Wcpabe;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.net.MalformedURLException;
 
 @SpringBootApplication
 public class CopyrightApplication {
-
-    public static void main(String[] args) throws InvalidArgumentException, MalformedURLException, CryptoException {
+    static {
         FabricClient fabricClient = new FabricClient();
-        FabricClient.init();
+        try {
+            Wcpabe.setup(Config.pk_file,Config.msk_file);
+            FabricClient.init();
+
+
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
         SpringApplication.run(CopyrightApplication.class, args);
     }
 }

@@ -6,6 +6,7 @@ import com.wtlife.boot.domain.Org;
 import com.wtlife.boot.domain.Right;
 import com.wtlife.boot.util.Config;
 import com.wtlife.boot.util.DateStamp;
+import nupt.wtlife.wcpabe.Wcpabe;
 import org.hyperledger.fabric.sdk.Channel;
 import org.hyperledger.fabric.sdk.TransactionInfo;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
@@ -23,7 +24,7 @@ public class FabricService {
      * Invoke
      */
     //版权登记
-    public String registRight(Right right) throws TransactionException, InvalidArgumentException, UnsupportedEncodingException, ProposalException, MalformedURLException {
+    public String registRight(Right right,String policy) throws Exception {
         Channel channel = FabricClient.client.newChannel(Config.ChannelId);
         Org org = Config.getConfigure().get("org1");
         String peerName = "peer0.center.copyright.com";
@@ -32,6 +33,20 @@ public class FabricService {
         channel.addPeer(FabricClient.client.newPeer(peerName, org.getPeerLocation(peerName)));
         channel.addOrderer(FabricClient.client.newOrderer(ordererName, org.getOrdererLocation(ordererName)));
         channel.initialize();
+
+
+        /*
+        policy
+        a org1  =a1 1, org2  = a2  2
+        b peer0 =b1 1, peer0 = b2  2
+         */
+
+
+        String cphtext = Wcpabe.enc(Config.pk_file,
+                policy,
+                right.getId(),
+                Config.work_dir+right.name+"enc_file");
+        right.setId(cphtext);
         return FabricClient.regist(channel, right);
     }
 
@@ -39,7 +54,7 @@ public class FabricService {
      * Query
      */
     //根据名字查询
-    public String queryRightByName(Right right) throws Exception {
+    public String queryRightByName(Right right,String username) throws Exception {
         Channel channel = FabricClient.client.getChannel(Config.ChannelId);
         Org org = Config.getConfigure().get("org1");
         String peerName = "peer0.center.copyright.com";
@@ -48,12 +63,18 @@ public class FabricService {
         String json = FabricClient.query(channel, right);
         Right res = JSON.parseObject(json, Right.class);
         String time = DateStamp.getDate(String.valueOf(res.getTimestamp()));
+
+        String plain= Wcpabe.dec(Config.pk_file,Config.work_dir+username+"prv_file",Config.attr10,Config.work_dir+right.getName()+"enc_file");
+        if (plain!="0"){
+            res.setId(plain);
+        }
         return "名   称:" + res.getName() + "</br>" +
                 "作   者:" + res.getAuthor() + "</br>" +
                 "登记机构:" + res.getPress() + "</br>" +
                 "登记时间:" + time + "</br>" +
                 "作品哈希:" + res.getHash() + "</br>" +
-                "作品签名:" + res.getSignature() + "</br>";
+                "作品签名:" + res.getSignature() + "</br>"+
+                "作者身份:" + res.getId()+"<br>";
     }
 
     //    根据交易id查询交易信息

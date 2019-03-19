@@ -12,6 +12,16 @@ public class Config {
     public static String ChainCodeVersion = "2.0";
     public static String ChannelId = "mychannel";
 
+    public static String work_dir= "abe_temp/";
+    public static String pk_file = work_dir+"pk_file";
+    public static String msk_file = work_dir+"pk_file";
+
+    public static String attr10= "org1 peer0";
+    public static String attr11= "org1 peer1";
+    public static String attr20= "org2 peer0";
+    public static String attr21= "org2 peer1";
+
+
     public static HashMap<String, Org> getConfigure() throws MalformedURLException, InvalidArgumentException {
         HashMap<String, Org> orgHashMap = new HashMap<>();
         Org org1 = new Org("center", "centerMSP");

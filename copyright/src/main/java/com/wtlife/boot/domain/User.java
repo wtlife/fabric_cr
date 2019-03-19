@@ -25,6 +25,17 @@ public class User {
     @Column(nullable = false)
     private String publicKey;
 
+    @Column(nullable = false)
+    private String prv_file;
+
+    public String getPrv_file() {
+        return prv_file;
+    }
+
+    public void setPrv_file(String prv_file) {
+        this.prv_file = prv_file;
+    }
+
     public int getIDnumber() {
         return IDnumber;
     }

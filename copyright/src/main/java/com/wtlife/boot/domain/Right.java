@@ -8,17 +8,27 @@ public class Right {
     private int timestamp;
     private String hash;
     private String signature;
+    private String id;
 
-    public Right(String name, String author, String press, int timeStamp, String hash, String signature) {
+    public Right(String name, String author, String press, int timeStamp, String hash, String signature,String id) {
         this.name = name;
         this.author = author;
         this.press = press;
         this.timestamp = timeStamp;
         this.hash = hash;
         this.signature = signature;
+        this.id = id;
     }
 
     public Right() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

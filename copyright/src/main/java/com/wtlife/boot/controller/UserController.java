@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+
 
 @Controller
 @EnableAutoConfiguration
@@ -45,7 +48,7 @@ public class UserController {
 
     @RequestMapping(value = "/registUser", method = RequestMethod.POST)
     @ResponseBody
-    String registUser(User user) {
+    String registUser(User user) throws IOException, NoSuchAlgorithmException {
         return userService.registUser(user);
     }
 
