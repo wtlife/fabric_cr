@@ -76,7 +76,7 @@ CHAINCODE_PATH="rightcc"
 CHAINCODE_NAME="myrightcc"
 CHAINCODE_EMPTY_ARGS='[]'
 CHAINCODE_QUERY_ARGS='["queryRightByName","work1","tom","center"]'
-CHAINCODE_INVOKE_ARGS_1='["regist","work1","tom","center","0","0xhash","signature"]' 
+CHAINCODE_INVOKE_ARGS_1='["regist","work1","tom","center","0000","hash","signature","12345678"]' 
 
 uplogd "clean"
 if [ "$workspaces_path" == "" ] || [ "$workspaces_path" == "/" ]; then
