@@ -12,4 +12,6 @@ docker rmi -f $(docker images | grep "dev\|none\|test-vp\|-peer[0-9]"  | awk '{p
 docker volume prune -f
 docker network prune -f
 
+# rm ../copyright/abe_temp/**
+
 exit 0

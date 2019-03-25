@@ -19,7 +19,7 @@ type Right struct {
 	Timestamp int64  `json:"timestamp"`
 	Hash      string `json:"hash"`
 	Signature string `json:"signature"`
-	ID        string `json:"id"`
+	IDnumber  string `json:"IDnumber"`
 }
 
 func main() {
