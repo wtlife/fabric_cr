@@ -4,7 +4,6 @@ import com.wtlife.boot.domain.Org;
 import com.wtlife.boot.domain.RightUser;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
 
-import java.net.MalformedURLException;
 import java.util.HashMap;
 
 public class Config {
@@ -16,17 +15,17 @@ public class Config {
     /*
     属性加密工作目录
     */
-    public static String work_dir= "abe_temp/";
+    public static String work_dir= "/home/wutao/Append/workspaces/fabric/fabric_cr/copyright/abe_temp/";
     public static String pk_file = work_dir+"pk_file";
-    public static String msk_file = work_dir+"pk_file";
+    public static String msk_file = work_dir+"msk_file";
 
     /*
     用户属性
      */
-    public static String attr10= "org1 peer0";
-    public static String attr11= "org1 peer1";
-    public static String attr20= "org2 peer0";
-    public static String attr21= "org2 peer1";
+    public static String attr01= "peer0,org1";
+    public static String attr11= "peer1,org1";
+    public static String attr02= "peer0,org2";
+    public static String attr12= "peer1,org2";
 
 
     /*
@@ -38,7 +37,7 @@ public class Config {
     public static String peer1org2= "peer1.press1.copyright.com";
     public static String ordererName= "orderer.copyright.com";
 
-    public static HashMap<String, Org> getConfigure() throws MalformedURLException, InvalidArgumentException {
+    public static HashMap<String, Org> getConfigure() {
         HashMap<String, Org> orgHashMap = new HashMap<>();
         Org org1 = new Org("center", "centerMSP");
         org1.addPeerLocation("peer0.center.copyright.com", "grpc://127.0.0.1:11051");

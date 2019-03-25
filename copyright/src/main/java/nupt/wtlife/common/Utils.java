@@ -73,23 +73,23 @@ public class Utils {
     }
 
     public static TnwAttr[] parseAttr(String attr_str) {
-        /*a1,b1,...*/
+        /*peer,org,...*/
         TnwAttr[] tnwAttrs=new TnwAttr[2];
         String[] attrArray = attr_str.split(",");
-        String identity = attrArray[0];
-        String organization = attrArray[1];
+        String identity = attrArray[0];//peer
+        String organization = attrArray[1];//org
 
         for (int i = 0; i <tnwAttrs.length ; i++) {
             tnwAttrs[i]=new TnwAttr(attrArray[i],
                     Const.typeMap.get(attrArray[i]),
                     Const.weightMap.get(attrArray[i]));
-//            System.out.println(tnwAttrs[i].name+"***"+tnwAttrs[i].type+"***"+tnwAttrs[i].weight);
         }
         return tnwAttrs;
     }
 
     public static TnwPolicy parsePolicy(String policy_str){
-        /* t,n,a=,b=,...*/
+        /* t,n,a=,b=,...peer,org*/
+
         TnwPolicy policy = new TnwPolicy();
         String[] policy_arr = policy_str.split(",");
         policy.t=Integer.valueOf(policy_arr[0]);
@@ -101,7 +101,6 @@ public class Utils {
             String value = threshold[1];
 
             policy.kx.put(type,Integer.valueOf(value));
-//            System.out.println(type + policy.kx.get(type));
         }
         return policy;
     }

@@ -8,27 +8,28 @@ public class Right {
     private int    timestamp;
     private String hash;
     private String signature;
-    private String id;
+    private String IDnumber;
 
-    public Right(String name, String author, String press, int timeStamp, String hash, String signature,String id) {
+
+    public Right(String name, String author, String press, int timeStamp, String hash, String signature, String IDnumber) {
         this.name = name;
         this.author = author;
         this.press = press;
         this.timestamp = timeStamp;
         this.hash = hash;
         this.signature = signature;
-        this.id = id;
+        this.IDnumber = IDnumber;
     }
 
     public Right() {
     }
 
-    public String getId() {
-        return id;
+    public String getIDnumber() {
+        return IDnumber;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIDnumber(String IDnumber) {
+        this.IDnumber = IDnumber;
     }
 
     public String getName() {
@@ -86,11 +87,11 @@ public class Right {
                 String.valueOf(this.getTimestamp()),
                 this.getHash(),
                 this.getSignature(),
-                this.getId()};
+                this.getIDnumber()};
     }
 
     @Override
     public String toString() {
-        return "Right [name=" + name + ", author=" + author + ",press=" + press + ",timestamp=" + timestamp + ",hash=" + hash + ",signature=" + signature + ",id=" + id + "]";
+        return "Right [name=" + name + ", author=" + author + ",press=" + press + ",timestamp=" + timestamp + ",hash=" + hash + ",signature=" + signature + ",id=" + IDnumber + "]";
     }
 }

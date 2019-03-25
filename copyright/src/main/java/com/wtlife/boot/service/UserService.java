@@ -38,11 +38,10 @@ public class UserService {
             String prv_file = Config.work_dir+user.getName()+"prv_file";
 
             // attribute
-            Wcpabe.inkeyGen(Config.pk_file, Config.attr10,inkey_file);
-            Wcpabe.keyGen(inkey_file,Config.pk_file,Config.msk_file,prv_file,Config.attr10);
+            Wcpabe.inkeyGen(Config.pk_file, Config.attr11,inkey_file);
+            Wcpabe.keyGen(inkey_file,Config.pk_file,Config.msk_file,prv_file,Config.attr11);
 
             user.setPrv_file(prv_file);
-
 
             userDao.save(user);
             return "用户名" + user.getName() + "注册成功！</br>"

@@ -1,14 +1,16 @@
-### IntelliJ IDEA ###
+### copyright###
 copyright/target
 copyright/.idea
 copyright/.mvn
 copyright/sql
 copyright/*.iws
-copyright/src/main/resources/temp
-copyright/src/main/abe_temp
+copyright/src/main/resources/temp  
+copyright/doc
 
+*_file
 *.iml
 *.ipr
+*.vscode
 
 ### NetBeans ###
 /nbproject/private/

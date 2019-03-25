@@ -13,34 +13,44 @@ import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
 import org.hyperledger.fabric.sdk.exception.ProposalException;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 
 @Service
 public class FabricService {
+    /*
+    初始化
+     */
+    static Channel channel;
+    static {
+        try {
+            channel = FabricClient.client.newChannel(Config.ChannelId);
+            Org org = Config.getConfigure().get("org1");
+            channel.addPeer(FabricClient.client.newPeer(Config.peer0org1, org.getPeerLocation(Config.peer0org1)));
+            channel.addOrderer(FabricClient.client.newOrderer(Config.ordererName, org.getOrdererLocation(Config.ordererName)));
+            channel.initialize();
 
-    /**
-     * Invoke
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*
+      Invoke
      */
     //版权登记
     public String registRight(Right right,String policy) throws Exception {
-        Channel channel = FabricClient.client.newChannel(Config.ChannelId);
-        Org org = Config.getConfigure().get("org1");
-
-        channel.addPeer(FabricClient.client.newPeer(Config.peer0org1, org.getPeerLocation(Config.peer0org1)));
-        channel.addOrderer(FabricClient.client.newOrderer(Config.ordererName, org.getOrdererLocation(Config.ordererName)));
-        channel.initialize();
 
         /*
         policy
-        a org1  =a1 1, org2  = a2  2
-        b peer0 =b1 1, peer0 = b2  2
+        t,n,peer=,org=,...
          */
 
 
         String cphtext = Wcpabe.enc(Config.pk_file,
                 policy,
-                right.getId(),
+                right.getIDnumber(),
                 Config.work_dir+right.name+"enc_file");
-        right.setId(cphtext);
+        right.setIDnumber(cphtext);
         return FabricClient.regist(channel, right);
     }
 
@@ -48,38 +58,49 @@ public class FabricService {
      * Query
      */
     //根据名字查询
-    public String queryRightByName(Right right,String username) throws Exception {
-        Channel channel = FabricClient.client.getChannel(Config.ChannelId);
-        Org org = Config.getConfigure().get("org1");
+    public String queryRightByName(Right right,String username) throws IOException {
 
-        String json = FabricClient.query(channel, right);
+        String json = null;
+        try {
+            json = FabricClient.query(channel, right);
+        } catch (Exception e) {
+            return "查询信息出错，请检测输入!";
+        }
         Right res = JSON.parseObject(json, Right.class);
         String time = DateStamp.getDate(String.valueOf(res.getTimestamp()));
+        String IDnumber="";
 
-        String plain= Wcpabe.dec(Config.pk_file,Config.work_dir+username+"prv_file",Config.attr10,Config.work_dir+right.getName()+"enc_file");
-        if (plain!="0"){
-            res.setId(plain);
+        String plain= Wcpabe.dec(Config.pk_file,
+                Config.work_dir+username+"prv_file",
+                Config.attr12,
+                Config.work_dir+right.getName()+"enc_file");
+
+        if ((plain.equals("0"))||(plain.equals("Given final block not properly padded"))||plain.equals(null)){
+            IDnumber="你的属性不满足该部分消息的访问策略！";
+        }else {
+            IDnumber = plain;
         }
-        return "名   称:" + res.getName() + "</br>" +
-                "作   者:" + res.getAuthor() + "</br>" +
-                "登记机构:" + res.getPress() + "</br>" +
-                "登记时间:" + time + "</br>" +
-                "作品哈希:" + res.getHash() + "</br>" +
-                "作品签名:" + res.getSignature() + "</br>"+
-                "作者身份:" + res.getId()+"<br>";
+
+        return  "作品名称:" + res.getName()      + "</br>" +
+                "作品作者:" + res.getAuthor()    + "</br>" +
+                "登记机构:" + res.getPress()     + "</br>" +
+                "登记时间:" + time               + "</br>" +
+                "作品哈希:" + res.getHash()      + "</br>" +
+                "作品签名:" + res.getSignature() + "</br>" +
+                "作者身份:" + IDnumber           + "<br>"  ;
     }
 
     //    根据交易id查询交易信息
     public String queryTxInfoById(String id) {
-        Channel channel = FabricClient.client.getChannel(Config.ChannelId);
+//        Channel channel = FabricClient.client.getChannel(Config.ChannelId);
         TransactionInfo txInfo = null;
         try {
             txInfo = channel.queryTransactionByID(id);
         } catch (ProposalException e) {
             e.printStackTrace();
-            return "Proposal出错" + e.getMessage();
+            return "发送Proposal出错"  + e.getMessage();
         } catch (InvalidArgumentException e) {
-            return "请输入正确的id" + e.getMessage();
+            return "请输入正确的交易id" + e.getMessage();
         }
         System.out.println("TransactionInfo:\n 交易Id:" + txInfo.getTransactionID()
                 + "\n ValidationCode: \n" + txInfo.getValidationCode().getNumber());

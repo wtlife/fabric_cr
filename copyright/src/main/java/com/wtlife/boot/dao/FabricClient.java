@@ -51,7 +51,6 @@ public class FabricClient {
         client.setCryptoSuite(cs);
         orgHashMap = Config.getConfigure();
 
-
         peer0org1 = orgHashMap.get("org1").getAdmin();
         client.setUserContext(peer0org1);
     }

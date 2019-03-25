@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Const {
-    public String[] type_list = {"org","peer"};
+    public String[] type_list = {"peer","org"};
     public TnwAttr[] attrs = new TnwAttr[2];
 //    public TnwPolicy policy;
 //    public void init(){

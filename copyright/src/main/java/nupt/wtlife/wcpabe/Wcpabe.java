@@ -24,8 +24,6 @@ public class Wcpabe {
         Utils.writeFile(msk_str,msk_byte);
 
 
-//        DEBUG
-//        System.out.println("pk=="+pk.g_hat_alpha.toString());
     }
 
     public static void inkeyGen(String pk_str,String attr_str, String inkey_str) throws IOException, NoSuchAlgorithmException {
@@ -41,9 +39,6 @@ public class Wcpabe {
         inkey_byte = Serialize.serializeTnwIsk(iSk);
         Utils.writeFile(inkey_str,inkey_byte);
 
-//       DEBUG
-//        System.out.println("pk=="+pk.g_hat_alpha.toString());
-//        System.out.println("isk=="+iSk.Diy[0].toString());
 
 
     }
@@ -73,15 +68,7 @@ public class Wcpabe {
         key_byte=Serialize.serializeTnwSk(key);
         Utils.writeFile(key_str,key_byte);
 
-//        DEBUG
-//        System.out.println("key.K=="+key.K.toString());
-//        System.out.println("key.L=="+key.L.toString());
-//
-//        System.out.println("key.DX[0]=="+key.Dx[0].toString());
-//        System.out.println("key.DX[1]=="+key.Dx[1].toString());
-//        System.out.println("key.DY[0]=="+key.Dy[0].toString());
-//        System.out.println("key.DY[1]=="+key.Dy[1].toString());
-//        System.out.println("key.ATTR=="+key.attrs[1].name);
+
     }
 
     public static String enc(String pk_str,String policy_str,String message,String enc_file) throws Exception {
@@ -111,17 +98,11 @@ public class Wcpabe {
 
         Utils.writeEncfile(enc_file,cph_byte,aes_byte);
 
-//        DEBUG
-//        System.out.println("C1=="+cphText.C1);
-//        System.out.println("PK==="+pk.g_hat_alpha.toString());
-//        System.out.println("AES=="+Base64.getEncoder().encodeToString(aes_byte));
-//        System.out.println("CPH=="+Base64.getEncoder().encodeToString(cph_byte));
-//        System.out.println("m="+m.toString());
 
         return new String(Base64.getEncoder().encodeToString(aes_byte));
     }
 
-    public static String dec(String pk_str,String key_str,String attr_str,String enc) throws Exception {
+    public static String dec(String pk_str,String key_str,String attr_str,String enc) throws IOException {
         TnwPub pk;
         TnwSk sk;
         TnwCiphertext ciphertext;
@@ -130,7 +111,7 @@ public class Wcpabe {
         byte[] sk_byte;
         byte[] aes_byte,cph_byte;
         byte[][] tmp;
-        byte[] mess_byte;
+        byte[] mess_byte=null;
 
         pk_byte= Utils.readFile(pk_str);
         pk=Serialize.unserializeTnwPub(pk_byte);
@@ -145,24 +126,14 @@ public class Wcpabe {
 
         TnwElementBoolean tnwElementBoolean = MTnwabe.dec(ciphertext,sk,pk);
 
-//        DEBUG
-//        System.out.println("key.K=="+sk.K.toString());
-//        System.out.println("key.L=="+sk.L.toString());
-//        System.out.println("key.DX[0]=="+sk.Dx[0].toString());
-//        System.out.println("key.DX[1]=="+sk.Dx[1].toString());
-//        System.out.println("key.DY[0]=="+sk.Dy[0].toString());
-//        System.out.println("key.DY[1]=="+sk.Dy[1].toString());
-//        System.out.println("key.ATTR=="+sk.attrs[1].name);
-//        System.out.println("C1=="+ciphertext.C1);
-//        System.out.println("PK==="+pk.g_hat_alpha.toString());
-//        System.out.println("AES=="+ Base64.getEncoder().encodeToString(aes_byte));
-//        System.out.println("CPH=="+ Base64.getEncoder().encodeToString(cph_byte));
-//        System.out.println("m="+tnwElementBoolean.e.toString());
-
         if (!(tnwElementBoolean.b)){
             return "0";
         }else {
-            mess_byte=AES.decrypt(tnwElementBoolean.e.toBytes(),aes_byte);
+            try {
+                mess_byte=AES.decrypt(tnwElementBoolean.e.toBytes(),aes_byte);
+            } catch (Exception e) {
+                return e.getMessage();
+            }
             return new String(mess_byte);
         }
     }

@@ -155,22 +155,24 @@ public class MTnwabe {
             ifSatisfy(ciphertext.policy,sk);
             if(!ciphertext.policy.satisfy){
                 System.err.println("Not satisfy the policy!");
-                return null;
+                bool.b=false;
+                return bool;
+            }else {
+
+                pickSatisfy(ciphertext.policy, sk);
+
+                pre_dec(t, ciphertext.policy, sk, pk);
+                t.invert();
+                m = pairing.pairing(sk.L, ciphertext.C1);
+                m.mul(t);
+
+                m.invert();
+                m.mul(ciphertext.C);
+
+                bool.b = true;
+                bool.e = m;
+                return bool;
             }
-
-            pickSatisfy(ciphertext.policy,sk);
-
-            pre_dec(t,ciphertext.policy,sk,pk);
-            t.invert();
-            m=pairing.pairing(sk.L,ciphertext.C1);
-            m.mul(t);
-
-            m.invert();
-            m.mul(ciphertext.C);
-
-            bool.b=true;
-            bool.e=m;
-            return bool;
         }
 
         private static void pre_dec(Element r, TnwPolicy policy, TnwSk sk, TnwPub pk) {

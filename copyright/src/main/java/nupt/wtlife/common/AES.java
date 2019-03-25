@@ -4,12 +4,12 @@ import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.Base64;
 
 public class AES {
 
-        private static byte[] getRawKey(byte[] seed) throws Exception {
+        private static byte[] getRawKey(byte[] seed) throws NoSuchAlgorithmException {
             KeyGenerator kgen = KeyGenerator.getInstance("AES");
             SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
             sr.setSeed(seed);
@@ -21,7 +21,6 @@ public class AES {
 
         public static byte[] encrypt(byte[] seed, byte[] plaintext)
                 throws Exception {
-//            System.out.println("seed=="+Base64.getEncoder().encodeToString(seed));
             byte[] raw = getRawKey(seed);
             SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
@@ -32,7 +31,6 @@ public class AES {
 
         public static byte[] decrypt(byte[] seed, byte[] ciphertext)
                 throws Exception {
-//            System.out.println("seed=="+Base64.getEncoder().encodeToString(seed));
             byte[] raw = getRawKey(seed);
             SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
