@@ -11,11 +11,8 @@ import org.hyperledger.fabric.sdk.Channel;
 import org.hyperledger.fabric.sdk.TransactionInfo;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
 import org.hyperledger.fabric.sdk.exception.ProposalException;
-import org.hyperledger.fabric.sdk.exception.TransactionException;
 import org.springframework.stereotype.Service;
 
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
 
 @Service
 public class FabricService {
@@ -27,13 +24,10 @@ public class FabricService {
     public String registRight(Right right,String policy) throws Exception {
         Channel channel = FabricClient.client.newChannel(Config.ChannelId);
         Org org = Config.getConfigure().get("org1");
-        String peerName = "peer0.center.copyright.com";
-        String ordererName = "orderer.copyright.com";
 
-        channel.addPeer(FabricClient.client.newPeer(peerName, org.getPeerLocation(peerName)));
-        channel.addOrderer(FabricClient.client.newOrderer(ordererName, org.getOrdererLocation(ordererName)));
+        channel.addPeer(FabricClient.client.newPeer(Config.peer0org1, org.getPeerLocation(Config.peer0org1)));
+        channel.addOrderer(FabricClient.client.newOrderer(Config.ordererName, org.getOrdererLocation(Config.ordererName)));
         channel.initialize();
-
 
         /*
         policy
@@ -57,8 +51,6 @@ public class FabricService {
     public String queryRightByName(Right right,String username) throws Exception {
         Channel channel = FabricClient.client.getChannel(Config.ChannelId);
         Org org = Config.getConfigure().get("org1");
-        String peerName = "peer0.center.copyright.com";
-        String ordererName = "orderer.copyright.com";
 
         String json = FabricClient.query(channel, right);
         Right res = JSON.parseObject(json, Right.class);

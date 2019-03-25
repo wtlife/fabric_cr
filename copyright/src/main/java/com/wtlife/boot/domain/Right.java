@@ -2,10 +2,10 @@ package com.wtlife.boot.domain;
 
 public class Right {
 
-    public String name;
+    public  String name;
     private String author;
     private String press;
-    private int timestamp;
+    private int    timestamp;
     private String hash;
     private String signature;
     private String id;
@@ -85,11 +85,12 @@ public class Right {
                 this.getPress(),
                 String.valueOf(this.getTimestamp()),
                 this.getHash(),
-                this.getSignature()};
+                this.getSignature(),
+                this.getId()};
     }
 
     @Override
     public String toString() {
-        return "Right [name=" + name + ", author=" + author + ",press=" + press + ",timestamp=" + timestamp + ",hash=" + hash + ",signature=" + signature + "]";
+        return "Right [name=" + name + ", author=" + author + ",press=" + press + ",timestamp=" + timestamp + ",hash=" + hash + ",signature=" + signature + ",id=" + id + "]";
     }
 }

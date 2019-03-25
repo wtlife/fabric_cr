@@ -36,21 +36,20 @@ public class FabricClient {
     public static ChaincodeID cid = ChaincodeID.newBuilder().setName(Config.ChainCodeName).setVersion(Config.ChainCodeVersion).build();
     public static User peer0org1 = null;
 
-    /**
-     * return instance of client
+    /*
+      return instance of client
      */
     public HFClient getInstance() {
         return client;
     }
 
-    /**
-     * Init
+    /*
+      Init
      */
     public static void init() throws CryptoException, InvalidArgumentException, MalformedURLException {
         client = HFClient.createNewInstance();
         client.setCryptoSuite(cs);
         orgHashMap = Config.getConfigure();
-
 
 
         peer0org1 = orgHashMap.get("org1").getAdmin();

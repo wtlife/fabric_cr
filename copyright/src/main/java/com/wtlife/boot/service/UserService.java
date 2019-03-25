@@ -36,8 +36,11 @@ public class UserService {
              */
             String inkey_file = Config.work_dir+user.getName()+"inkey_file";
             String prv_file = Config.work_dir+user.getName()+"prv_file";
+
+            // attribute
             Wcpabe.inkeyGen(Config.pk_file, Config.attr10,inkey_file);
             Wcpabe.keyGen(inkey_file,Config.pk_file,Config.msk_file,prv_file,Config.attr10);
+
             user.setPrv_file(prv_file);
 
 

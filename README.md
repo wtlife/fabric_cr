@@ -42,6 +42,7 @@ type Right struct {
 	Timestamp int64  `json:"Ts"`
 	Hash      string `json:"Hash"`
 	Signature string `json:"Sig"`
+    ID        string `json:"id"`
 }
 ```
 
