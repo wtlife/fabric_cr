@@ -6,16 +6,17 @@
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
 </head>
 <body>
+<br>
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-3 column">
             <form role="form" method="POST" th:action="@{/fileVerify}">
-                <label for="hash">文件hash</label><input type="text" class="form-control" id="hash" name="hash"/>
-                <label for="signature">文件签名</label><input type="text" class="form-control" id="signature"
-                                                          name="signature"/>
-                <label for="publicKey">作者公钥</label><input type="text" class="form-control" id="publicKey"
-                                                          name="publicKey"/>
-                <button type="submit" class="btn btn-default">验证</button>
+                <label for="hash">文件哈希：</label><input type="text" class="form-control" id="hash" name="hash"/><br>
+                <label for="signature">文件签名：</label><input type="text" class="form-control" id="signature"
+                                                          name="signature"/><br>
+                <label for="publicKey">作者公钥：</label><input type="text" class="form-control" id="publicKey"
+                                                          name="publicKey"/><br>
+                <button type="submit" class="btn btn-default">点击验证！</button>
             </form>
         </div>
     </div>

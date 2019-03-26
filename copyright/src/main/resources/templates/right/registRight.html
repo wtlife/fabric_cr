@@ -9,27 +9,35 @@
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-3 column">
+            <br>
             <form role="form" method="POST" th:action="@{/registRight}" th:object="${right}">
 
-                <label for="name">名称</label><input type="text" class="form-control" id="name"
-                                                   th:field="*{name}"/>
+                <label for="name">作品名称:</label><input type="text" class="form-control" id="name"
+                                                   th:field="*{name}"/><br>
 
-                <label for="author">作者</label><input type="text" class="form-control" id="author"
-                                                     th:field="*{author}"/>
-                <label for="press">出版机构</label><input type="text" class="form-control" id="press"
-                                                      th:field="*{press}" th:placeholder="center"/>
-                <label for="timestamp">时间戳</label><input type="text" class="form-control" id="timestamp"
-                                                         th:field="*{timestamp}" th:placeholder="0"/>
-                <label for="hash">作品Hash</label><input type="text" class="form-control" id="hash"
-                                                       th:field="*{hash}"/>
-                <label for="signature">作品签名</label><input type="text" class="form-control" id="signature"
-                                                          th:field="*{signature}"/>
-                <label for="IDnumber">身份信息</label><input type="text" class="form-control" id="IDnumber"
-                                                          th:field="*{IDnumber}"/>
+                <label for="author">作品作者:</label><input type="text" class="form-control" id="author"
+                                                     th:field="*{author}"/><br>
+                <label for="press">出版机构:</label><input type="text" class="form-control" id="press"
+                                                      th:field="*{press}" placeholder="center"/><br>
+                <label for="hash">作品哈希:</label><input type="text" class="form-control" id="hash"
+                                                       th:field="*{hash}"/><br>
+                <label for="signature">作品签名:</label><input type="text" class="form-control" id="signature"
+                                                          th:field="*{signature}"/><br>
+                <label for="IDnumber">身份信息:</label><input type="text" class="form-control" id="IDnumber"
+                                                          th:field="*{IDnumber}" /><br>
+                <label for="timestamp">时间戳:</label><input type="text" class="form-control" id="timestamp"
+                                                          th:field="*{timestamp}" placeholder="0" readonly/><br>
 
-                <label for="policy">访问策略</label><input type="text" class="form-control" id="policy" name="policy"
-            />
-                <button type="submit" class="btn btn-default">Regist</button>
+                <div>公开我的身份信息： <br>
+                    <label><input type="radio" name="policy" value="2,4,peer=1,org=1" checked >所有人 </label>
+                    <br>
+                    <label><input type="radio" name="policy" value="3,4,peer=2,org=1" >仅出版机构管理员</label>
+                    <br>
+                    <label><input type="radio" name="policy" value="4,4,peer=2,org=2" >仅权威机构管理员</label>
+                    <br>
+                <br>
+                </div>
+                <button type="submit" class="btn btn-default">点击登记 !</button>
 
             </form>
         </div>

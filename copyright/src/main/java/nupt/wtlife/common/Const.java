@@ -36,10 +36,10 @@ public class Const {
     };
     public static Map<String, Integer> weightMap = new HashMap<String, Integer>(){
         {
-            put("org1", 1);
-            put("org2", 2);
-            put("peer0", 1);
-            put("peer1", 2);
+            put("org1", 2);
+            put("org2", 1);
+            put("peer0", 2);
+            put("peer1", 1);
         }
     };
 }

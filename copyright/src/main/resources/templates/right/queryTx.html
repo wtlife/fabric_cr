@@ -6,13 +6,14 @@
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
 </head>
 <body>
+<br>
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-3 column">
             <form role="form" method="POST" th:action="@{/queryTxInfoById}">
-                <label for="Id">交易Id</label><input type="text" class="form-control" id="Id" name="Id"
-            />
-                <button type="submit" class="btn btn-default">Query!</button>
+                <label for="Id">请输入交易ID：</label><input type="text" class="form-control" id="Id" name="Id"
+            /><br>
+                <button type="submit" class="btn btn-default">点击查询 !</button>
             </form>
         </div>
     </div>

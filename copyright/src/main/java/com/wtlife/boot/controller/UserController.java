@@ -65,7 +65,7 @@ public class UserController {
     String userLogin(User user, Model model) {
         boolean verify = userService.verifyUser(user);
         if (verify) {
-            model.addAttribute("name", user.getName());
+            model.addAttribute("user", user);
             return "/result";
         } else {
             return "redirect:/notVerify";

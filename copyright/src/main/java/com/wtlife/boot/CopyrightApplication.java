@@ -10,9 +10,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class CopyrightApplication {
     static {
-//        FabricClient fabricClient = new FabricClient();
         try {
-            Wcpabe.setup(Config.pk_file,Config.msk_file);
+//            Wcpabe.setup(Config.pk_file,Config.msk_file);
             FabricClient.init();
 
         } catch (Exception e) {

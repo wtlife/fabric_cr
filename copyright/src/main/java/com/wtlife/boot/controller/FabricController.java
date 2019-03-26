@@ -1,6 +1,7 @@
 package com.wtlife.boot.controller;
 
 import com.wtlife.boot.domain.Right;
+import com.wtlife.boot.domain.User;
 import com.wtlife.boot.service.FabricService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -22,14 +23,15 @@ public class FabricController {
      */
 
     @RequestMapping(value = "/rightRegist")
-    String registRight(Model model) {
+    String registRight(Model model,String userid) {
         model.addAttribute("right", new Right());
+        model.addAttribute("userid", userid);
         return "right/registRight";
     }
 
     @RequestMapping(value = "/registRight")
     @ResponseBody
-    String registUser(Right right,String policy) throws Exception {
+    String registUser(Right right,String policy) {
         return fabricService.registRight(right,policy);
     }
 

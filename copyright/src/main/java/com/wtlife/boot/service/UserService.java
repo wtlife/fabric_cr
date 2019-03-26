@@ -38,8 +38,8 @@ public class UserService {
             String prv_file = Config.work_dir+user.getName()+"prv_file";
 
             // attribute
-            Wcpabe.inkeyGen(Config.pk_file, Config.attr11,inkey_file);
-            Wcpabe.keyGen(inkey_file,Config.pk_file,Config.msk_file,prv_file,Config.attr11);
+            Wcpabe.inkeyGen(Config.pk_file, Config.admin_center,inkey_file);
+            Wcpabe.keyGen(inkey_file,Config.pk_file,Config.msk_file,prv_file,Config.admin_center);
 
             user.setPrv_file(prv_file);
 

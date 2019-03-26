@@ -14,6 +14,7 @@ import org.hyperledger.fabric.sdk.exception.ProposalException;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 @Service
 public class FabricService {
@@ -38,7 +39,7 @@ public class FabricService {
       Invoke
      */
     //版权登记
-    public String registRight(Right right,String policy) throws Exception {
+    public String registRight(Right right,String policy) {
 
         /*
         policy
@@ -46,35 +47,59 @@ public class FabricService {
          */
 
 
-        String cphtext = Wcpabe.enc(Config.pk_file,
-                policy,
-                right.getIDnumber(),
-                Config.work_dir+right.name+"enc_file");
+        String cphtext = null;
+        try {
+            cphtext = Wcpabe.enc(Config.pk_file,
+                    policy,
+                    right.getIDnumber(),
+                    Config.work_dir+right.name+"enc_file");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "加密阶段异常！"+"<br>"+e.getMessage();
+        }
         right.setIDnumber(cphtext);
-        return FabricClient.regist(channel, right);
+        try {
+            return FabricClient.regist(channel, right);
+        } catch (InvalidArgumentException e) {
+            e.printStackTrace();
+            return "输入有误，请检测输入参数！"+"<br>"+e.getMessage();
+        } catch (ProposalException e) {
+            e.printStackTrace();
+            return "发送proposal异常"+"<br>"+e.getMessage();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return "不支持的编码！"+"<br>"+e.getMessage();
+        }
     }
 
     /**
      * Query
      */
     //根据名字查询
-    public String queryRightByName(Right right,String username) throws IOException {
+    public String queryRightByName(Right right,String username) {
 
         String json = null;
         try {
             json = FabricClient.query(channel, right);
         } catch (Exception e) {
-            return "查询信息出错，请检测输入!";
+            return "查询信息出错，请检测输入!"+"<br>"+e.getMessage();
         }
         Right res = JSON.parseObject(json, Right.class);
         String time = DateStamp.getDate(String.valueOf(res.getTimestamp()));
         String IDnumber="";
 
-        String plain= Wcpabe.dec(Config.pk_file,
-                Config.work_dir+username+"prv_file",
-                Config.attr12,
-                Config.work_dir+right.getName()+"enc_file");
+        String plain= null;
+        try {
+            plain = Wcpabe.dec(Config.pk_file,
+                    Config.work_dir+username+"prv_file",
 
+                    //<--设置属性-->
+                    Config.admin_center,
+
+                    Config.work_dir+right.getName()+"enc_file");
+        } catch (IOException e) {
+            return "IO导致的解密阶段异常，请检测是否正确设置属性，或者属性是否匹配";
+        }
         if ((plain.equals("0"))||(plain.equals("Given final block not properly padded"))||plain.equals(null)){
             IDnumber="你的属性不满足该部分消息的访问策略！";
         }else {

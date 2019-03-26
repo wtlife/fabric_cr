@@ -20,12 +20,12 @@ public class Config {
     public static String msk_file = work_dir+"msk_file";
 
     /*
-    用户属性
+    用户属性 peer0=2,org1=2
      */
-    public static String attr01= "peer0,org1";
-    public static String attr11= "peer1,org1";
-    public static String attr02= "peer0,org2";
-    public static String attr12= "peer1,org2";
+    public static String admin_center= "peer0,org1";
+    public static String user_center= "peer1,org1";
+    public static String admin_press= "peer0,org2";
+    public static String user_press= "peer1,org2";
 
 
     /*
@@ -49,8 +49,8 @@ public class Config {
 
 
         Org org2 = new Org("press1", "press1MSP");
-        org2.addPeerLocation("peer0.center.copyright.com", "grpc://127.0.0.1:14052");
-        org2.addPeerLocation("peer1.center.copyright.com", "grpc://127.0.0.1:14054");
+        org2.addPeerLocation("peer0.press1.copyright.com", "grpc://127.0.0.1:14052");
+        org2.addPeerLocation("peer1.press1.copyright.com", "grpc://127.0.0.1:14054");
         org2.addOrdererLocation("orderer.copyright.com", "grpc://127.0.0.1:7050");
         RightUser Adminorg2 = new RightUser("peer", "Admin", "press1MSP");
         RightUser User1org2 = new RightUser("peer", "User1", "press1MSP");
