@@ -13,9 +13,9 @@
             <form role="form" method="POST" th:action="@{/fileVerify}">
                 <label for="hash">文件哈希：</label><input type="text" class="form-control" id="hash" name="hash"/><br>
                 <label for="signature">文件签名：</label><input type="text" class="form-control" id="signature"
-                                                          name="signature"/><br>
+                                                          name="signature" autocomplete="off"/><br>
                 <label for="publicKey">作者公钥：</label><input type="text" class="form-control" id="publicKey"
-                                                          name="publicKey"/><br>
+                                                          name="publicKey" autocomplete="off"/><br>
                 <button type="submit" class="btn btn-default">点击验证！</button>
             </form>
         </div>

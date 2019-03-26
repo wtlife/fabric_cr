@@ -13,20 +13,22 @@
             <form role="form" method="POST" th:action="@{/registRight}" th:object="${right}">
 
                 <label for="name">作品名称:</label><input type="text" class="form-control" id="name"
-                                                   th:field="*{name}"/><br>
+                                                   th:field="*{name}" autocomplete="off"/><br>
 
                 <label for="author">作品作者:</label><input type="text" class="form-control" id="author"
-                                                     th:field="*{author}"/><br>
+                                                     th:field="*{author}" autocomplete="off"/><br>
                 <label for="press">出版机构:</label><input type="text" class="form-control" id="press"
                                                       th:field="*{press}" placeholder="center"/><br>
-                <label for="hash">作品哈希:</label><input type="text" class="form-control" id="hash"
-                                                       th:field="*{hash}"/><br>
-                <label for="signature">作品签名:</label><input type="text" class="form-control" id="signature"
-                                                          th:field="*{signature}"/><br>
-                <label for="IDnumber">身份信息:</label><input type="text" class="form-control" id="IDnumber"
-                                                          th:field="*{IDnumber}" /><br>
                 <label for="timestamp">时间戳:</label><input type="text" class="form-control" id="timestamp"
                                                           th:field="*{timestamp}" placeholder="0" readonly/><br>
+                <label for="hash">作品哈希:</label><input type="text" class="form-control" id="hash"
+                                                       th:field="*{hash}" autocomplete="off"/><br>
+                <label for="signature">作品签名:</label><input type="text" class="form-control" id="signature"
+                                                          th:field="*{signature}" autocomplete="off"/><br>
+                <label for="IDnumber">身份信息:</label><input type="text" class="form-control" id="IDnumber"
+                                                           th:field="*{IDnumber}" th:placeholder="${userid}" readonly autocomplete="off"/><br>
+
+                <input type="hidden" class="form-control" th:name="Id" th:value="${userid}" >
 
                 <div>公开我的身份信息： <br>
                     <label><input type="radio" name="policy" value="2,4,peer=1,org=1" checked >所有人 </label>
@@ -35,7 +37,7 @@
                     <br>
                     <label><input type="radio" name="policy" value="4,4,peer=2,org=2" >仅权威机构管理员</label>
                     <br>
-                <br>
+                    <br>
                 </div>
                 <button type="submit" class="btn btn-default">点击登记 !</button>
 

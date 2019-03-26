@@ -46,6 +46,7 @@ public class FabricService {
         t,n,peer=,org=,...
          */
 
+        System.out.println(right.toString());
 
         String cphtext = null;
         try {
@@ -94,7 +95,7 @@ public class FabricService {
                     Config.work_dir+username+"prv_file",
 
                     //<--设置属性-->
-                    Config.admin_center,
+                    Config.user_press,
 
                     Config.work_dir+right.getName()+"enc_file");
         } catch (IOException e) {

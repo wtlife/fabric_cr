@@ -2,6 +2,7 @@ package com.wtlife.boot.controller;
 
 import com.wtlife.boot.domain.User;
 import com.wtlife.boot.service.UserService;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
@@ -62,7 +64,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
-    String userLogin(User user, Model model) {
+    String userLogin(User user ,Model model) {
         boolean verify = userService.verifyUser(user);
         if (verify) {
             model.addAttribute("user", user);

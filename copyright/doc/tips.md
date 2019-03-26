@@ -69,3 +69,8 @@ peer0.center.copyright.com
 作品哈希:1dd869dca640d83cab3d06827014a5a39ab081c5
 作品签名:MEQCIH+CsYqk59I9+M/8vrSBz5jraCo/+JS/Ar8pbkUZ8RKDAiBBUG4ChwjTD4znbq/rbjUTZn+Ggl94D2wV0sPadEBQ4A==
 作者身份:123456
+
+上传成功
+绝对路径:/home/wutao/temp/test
+文件Hash： 1dd869dca640d83cab3d06827014a5a39ab081c5
+文件签名:MEQCIC6OWj1yz5BUXJ/MCQzHaNCftoYexloEQ+4IUQUCSHvJAiAjQDztKW+xmgW47wbkw5QqN/eXgTjEoF7s/Zg1tntuGA==

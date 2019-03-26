@@ -38,8 +38,8 @@ public class UserService {
             String prv_file = Config.work_dir+user.getName()+"prv_file";
 
             // attribute
-            Wcpabe.inkeyGen(Config.pk_file, Config.admin_center,inkey_file);
-            Wcpabe.keyGen(inkey_file,Config.pk_file,Config.msk_file,prv_file,Config.admin_center);
+            Wcpabe.inkeyGen(Config.pk_file, Config.user_press,inkey_file);
+            Wcpabe.keyGen(inkey_file,Config.pk_file,Config.msk_file,prv_file,Config.user_press);
 
             user.setPrv_file(prv_file);
 
@@ -58,7 +58,12 @@ public class UserService {
         if (userDao.findByNameAndPassword(user.getName(), user.getPassword()).isEmpty()) {
             return false;
         } else {
+            user.setIDnumber(userDao.findUser(user.getName()).getIDnumber());
+            System.out.println(
+            user.getIDnumber()
+            );
             return true;
         }
     }
+
 }

@@ -8,7 +8,7 @@ public class Right {
     private int    timestamp;
     private String hash;
     private String signature;
-    private String IDnumber;
+    public String IDnumber;
 
 
     public Right(String name, String author, String press, int timeStamp, String hash, String signature, String IDnumber) {
@@ -92,6 +92,6 @@ public class Right {
 
     @Override
     public String toString() {
-        return "Right [name=" + name + ", author=" + author + ",press=" + press + ",timestamp=" + timestamp + ",hash=" + hash + ",signature=" + signature + ",id=" + IDnumber + "]";
+        return "Right [name=" + name + ", author=" + author + ",press=" + press + ",timestamp=" + timestamp + ",hash=" + hash + ",signature=" + signature + ",IDnumber=" + IDnumber + "]";
     }
 }

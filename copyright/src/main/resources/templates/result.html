@@ -20,10 +20,10 @@
         </li>
 
         <li role="presentation">
-            <a href="/rightRegist" class="href" >版权登记</a>
+            <a th:href="'/rightRegist?userid='+${user.getIDnumber()}+'&&username='+${user.getName()}" class="href" >版权登记</a>
         </li>
 
-        <li role="presentation"><a href="/rightQuery" class="href" >版权查询</a>
+        <li role="presentation"><a th:href="'/rightQuery?username='+${user.getName()}" class="href" >版权查询</a>
         </li>
 
         <li role="presentation"><a href="/fileVerify" class="href" >文件验证</a>

@@ -13,6 +13,6 @@ public interface UserDao extends JpaRepository<User, Long> {
     List<User> findByNameAndPassword(String name, String password);
 
     @Query(value = "select u from User u where u.name=:name")
-    List<User> findUser(@Param("name") String name);
+    User findUser(@Param("name") String name);
 
 }

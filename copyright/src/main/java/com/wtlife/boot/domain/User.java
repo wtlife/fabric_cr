@@ -20,7 +20,7 @@ public class User {
 
 
     @Column(nullable = false)
-    private int IDnumber;
+    private String IDnumber;
 
     @Column(nullable = false)
     private String publicKey;
@@ -36,11 +36,11 @@ public class User {
         this.prv_file = prv_file;
     }
 
-    public int getIDnumber() {
+    public String  getIDnumber() {
         return IDnumber;
     }
 
-    public void setIDnumber(int IDnumber) {
+    public void setIDnumber(String  IDnumber) {
         this.IDnumber = IDnumber;
     }
 

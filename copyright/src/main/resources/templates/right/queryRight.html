@@ -13,14 +13,14 @@
             <form role="form" method="GET" th:action="@{/queryRightByName}" th:object="${right}">
 
                 <label for="name">作品名称：</label><input type="text" class="form-control" id="name"
-                                                   th:field="*{name}"/><br>
+                                                   th:field="*{name}" autocomplete="off"/><br>
                 <label for="author">作品作者：</label><input type="text" class="form-control" id="author"
-                                                     th:field="*{author}"/><br>
+                                                     th:field="*{author}" autocomplete="off"/><br>
                 <label for="press">出版机构：</label><input type="text" class="form-control" id="press"
                                                       th:field="*{press}" placeholder="center" /><br>
 
-                <label for="username">你的用户名:</label><input type="text" class="form-control" id="username" name="username"
-            /><br>
+                <label >你的用户名:</label><input type="text" class="form-control"  name="username"
+            th:placeholder="${username}" th:value="${username}" readonly /><br>
                 <button type="submit" class="btn btn-default">点击查询 !</button>
 
             </form>
